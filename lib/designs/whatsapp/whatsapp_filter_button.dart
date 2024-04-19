@@ -6,7 +6,7 @@ import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 /// Represents the button for applying filters in the WhatsApp theme.
 class WhatsAppFilterBtn extends StatefulWidget {
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// The opacity of the button.
   final double opacity;

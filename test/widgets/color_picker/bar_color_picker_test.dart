@@ -11,7 +11,7 @@ void main() {
       int colorValue = 0;
       await tester.pumpWidget(MaterialApp(
         home: BarColorPicker(
-          configs: const ProImageEditorConfigs(),
+          configs: const StoryEditorConfigs(),
           initialColor: const Color(0xffff0000),
           colorListener: (value) => colorValue = value,
         ),

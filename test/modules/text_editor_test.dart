@@ -45,7 +45,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextEditor(
-              configs: const ProImageEditorConfigs(
+              configs: const StoryEditorConfigs(
                 textEditorConfigs:
                     TextEditorConfigs(initialTextAlign: TextAlign.left),
               ),
@@ -98,7 +98,7 @@ void main() {
           home: Scaffold(
             body: TextEditor(
               theme: ThemeData.dark(),
-              configs: const ProImageEditorConfigs(
+              configs: const StoryEditorConfigs(
                 textEditorConfigs: TextEditorConfigs(
                     initialBackgroundColorMode:
                         LayerBackgroundColorModeE.onlyColor),

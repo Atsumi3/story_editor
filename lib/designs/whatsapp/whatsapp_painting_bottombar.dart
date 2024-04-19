@@ -4,7 +4,7 @@ import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 /// Represents the bottom bar for the paint functionality in the WhatsApp theme.
 class WhatsAppPaintBottomBar extends StatefulWidget {
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// The current stroke width.
   final double strokeWidth;

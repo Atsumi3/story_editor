@@ -6,7 +6,7 @@ import 'utils/whatsapp_appbar_button_style.dart';
 /// Represents the app bar for the WhatsApp theme.
 class WhatsAppAppBar extends StatefulWidget {
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// Indicates whether the undo action is available.
   final bool canUndo;

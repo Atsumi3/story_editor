@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:story_editor/models/filter_state_history.dart';
-import 'package:story_editor/models/blur_state_history.dart';
-import 'package:story_editor/story_editor.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:story_editor/models/blur_state_history.dart';
+import 'package:story_editor/models/filter_state_history.dart';
+import 'package:story_editor/story_editor.dart';
 
 import '../../models/editor_image.dart';
 import '../../widgets/loading_dialog.dart';
@@ -38,7 +38,7 @@ class FilterEditor extends StatefulWidget {
   final ThemeData theme;
 
   /// The image editor configs.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// A callback function that can be used to update the UI from custom widgets.
   final Function? onUpdateUI;
@@ -101,7 +101,7 @@ class FilterEditor extends StatefulWidget {
     Uint8List byteArray, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Function? onUpdateUI,
     bool convertToUint8List = false,
     List<FilterStateHistory>? activeFilters,
@@ -145,7 +145,7 @@ class FilterEditor extends StatefulWidget {
     File file, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Function? onUpdateUI,
     bool convertToUint8List = false,
     List<FilterStateHistory>? activeFilters,
@@ -189,7 +189,7 @@ class FilterEditor extends StatefulWidget {
     String assetPath, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Function? onUpdateUI,
     bool convertToUint8List = false,
     List<FilterStateHistory>? activeFilters,
@@ -232,7 +232,7 @@ class FilterEditor extends StatefulWidget {
     String networkUrl, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Function? onUpdateUI,
     bool convertToUint8List = false,
     List<FilterStateHistory>? activeFilters,
@@ -277,7 +277,7 @@ class FilterEditor extends StatefulWidget {
   factory FilterEditor.autoSource({
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Function? onUpdateUI,
     bool convertToUint8List = false,
     List<FilterStateHistory>? activeFilters,

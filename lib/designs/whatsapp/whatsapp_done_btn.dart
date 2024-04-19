@@ -7,7 +7,7 @@ import 'package:story_editor/widgets/story_editor_desktop_mode.dart';
 /// Represents the "Done" button for the WhatsApp theme.
 class WhatsAppDoneBtn extends StatefulWidget {
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// The foreground color of the button.
   final Color foregroundColor;

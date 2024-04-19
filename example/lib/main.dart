@@ -40,7 +40,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _editor = GlobalKey<ProImageEditorState>();
+  final _editor = GlobalKey<StoryEditorState>();
 
   Future<Uint8List> loadImageBytes() async {
     final ByteData data = await rootBundle.load('assets/demo.png');
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (context.mounted) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => ProImageEditor.memory(
+                        builder: (context) => StoryEditor.memory(
                           bytes,
                           key: _editor,
                           onImageEditingComplete: (bytes) async {
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 .toMap();
                             debugPrint(history.toString());
                           },
-                          configs: ProImageEditorConfigs(
+                          configs: StoryEditorConfigs(
                             // customWidgets: ImageEditorCustomWidgets(
                             //     bottomNavigationBar: Container(
                             //   color: Colors.teal.shade100,
@@ -500,12 +500,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => ProImageEditor.network(
+                      builder: (context) => StoryEditor.network(
                         'https://picsum.photos/id/350/1500/3000',
                         onImageEditingComplete: (bytes) async {
                           Navigator.pop(context);
                         },
-                        configs: ProImageEditorConfigs(
+                        configs: StoryEditorConfigs(
                           textEditorConfigs: TextEditorConfigs(
                             whatsAppCustomTextStyles: [
                               GoogleFonts.roboto(),

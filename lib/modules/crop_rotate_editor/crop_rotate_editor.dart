@@ -49,7 +49,7 @@ class CropRotateEditor extends StatefulWidget {
   final Uint8List? bytesWithLayers;
 
   /// The image editor configs
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// The size of the image to be edited.
   final Size imageSize;
@@ -108,7 +108,7 @@ class CropRotateEditor extends StatefulWidget {
     Key? key,
     required ThemeData theme,
     required Size imageSize,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Uint8List? bytesWithLayers,
     Function? onUpdateUI,
   }) {
@@ -155,7 +155,7 @@ class CropRotateEditor extends StatefulWidget {
     Key? key,
     required ThemeData theme,
     required Size imageSize,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Uint8List? bytesWithLayers,
     Function? onUpdateUI,
   }) {
@@ -201,7 +201,7 @@ class CropRotateEditor extends StatefulWidget {
     Key? key,
     required ThemeData theme,
     required Size imageSize,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Uint8List? bytesWithLayers,
     Function? onUpdateUI,
   }) {
@@ -243,7 +243,7 @@ class CropRotateEditor extends StatefulWidget {
     Key? key,
     required ThemeData theme,
     required Size imageSize,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Uint8List? bytesWithLayers,
     Function? onUpdateUI,
   }) {
@@ -287,7 +287,7 @@ class CropRotateEditor extends StatefulWidget {
     Key? key,
     required ThemeData theme,
     required Size imageSize,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     Uint8List? bytesWithLayers,
     Function? onUpdateUI,
     Uint8List? byteArray,

@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:story_editor/story_editor.dart';
 
@@ -55,7 +56,7 @@ class BarColorPicker extends StatefulWidget {
   final double? initPosition;
 
   /// Image editor configurations.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   const BarColorPicker({
     super.key,

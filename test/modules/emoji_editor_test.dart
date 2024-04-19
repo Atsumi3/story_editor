@@ -39,7 +39,7 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: EmojiEditor(
-              configs: ProImageEditorConfigs(
+              configs: StoryEditorConfigs(
                 emojiEditorConfigs: EmojiEditorConfigs(
                     swapCategoryAndBottomBar: swapCategoryAndBottomBar),
               ),

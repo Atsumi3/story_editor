@@ -9,7 +9,7 @@ import '../models/layer.dart';
 /// as `EmojiLayerData` containing the selected emoji text.
 class StickerEditor extends StatefulWidget {
   /// The image editor configs
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// Creates an `StickerEditor` widget.
   const StickerEditor({

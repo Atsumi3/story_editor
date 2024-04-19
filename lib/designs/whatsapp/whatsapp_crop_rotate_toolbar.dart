@@ -6,7 +6,7 @@ import '../../story_editor.dart';
 /// Represents the toolbar for the crop/rotate functionality in the WhatsApp theme.
 class WhatsAppCropRotateToolbar extends StatefulWidget {
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// Callback function for canceling the crop/rotate operation.
   final Function() onCancel;

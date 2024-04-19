@@ -16,7 +16,7 @@ WhatsAppStickerMode whatsAppTemporaryStickerMode = WhatsAppStickerMode.sticker;
 /// Represents the sticker-editor page for the WhatsApp theme.
 class WhatsAppStickerPage extends StatefulWidget {
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   const WhatsAppStickerPage({
     super.key,

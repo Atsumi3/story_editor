@@ -9,7 +9,7 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         home: StickerEditor(
-          configs: ProImageEditorConfigs(
+          configs: StoryEditorConfigs(
             stickerEditorConfigs: StickerEditorConfigs(
               enabled: true,
               buildStickers: (setLayer) {

@@ -13,7 +13,7 @@ class WhatsAppPaintAppBar extends StatefulWidget {
   final Color activeColor;
 
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// Callback function for closing the editor.
   final Function() onClose;

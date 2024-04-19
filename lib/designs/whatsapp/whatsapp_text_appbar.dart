@@ -7,7 +7,7 @@ import 'whatsapp_done_btn.dart';
 /// Represents the app bar for the text-editor in the WhatsApp theme.
 class WhatsAppTextAppBar extends StatefulWidget {
   /// The configuration for the image editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// The alignment of the text.
   final TextAlign align;

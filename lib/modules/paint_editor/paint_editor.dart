@@ -9,12 +9,12 @@ import 'package:story_editor/designs/whatsapp/whatsapp_painting_bottombar.dart';
 import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 import 'package:story_editor/models/theme/theme.dart';
 
+import '../../models/blur_state_history.dart';
 import '../../models/editor_configs/paint_editor_configs.dart';
 import '../../models/editor_image.dart';
 import '../../models/filter_state_history.dart';
-import '../../models/blur_state_history.dart';
-import '../../models/paint_editor/paint_bottom_bar_item.dart';
 import '../../models/layer.dart';
+import '../../models/paint_editor/paint_bottom_bar_item.dart';
 import '../../utils/design_mode.dart';
 import '../../utils/theme_functions.dart';
 import '../../widgets/color_picker/bar_color_picker.dart';
@@ -51,7 +51,7 @@ class PaintingEditor extends StatefulWidget {
   final Size imageSize;
 
   /// Configuration options for the editor.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// Additional padding for the editor.
   final EdgeInsets? paddingHelper;
@@ -75,7 +75,7 @@ class PaintingEditor extends StatefulWidget {
     this.networkUrl,
     this.file,
     required this.theme,
-    this.configs = const ProImageEditorConfigs(),
+    this.configs = const StoryEditorConfigs(),
     required this.imageSize,
     this.layers,
     this.onUpdateUI,
@@ -95,7 +95,7 @@ class PaintingEditor extends StatefulWidget {
     Uint8List byteArray, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     required Size imageSize,
     List<Layer>? layers,
     EdgeInsets? paddingHelper,
@@ -122,7 +122,7 @@ class PaintingEditor extends StatefulWidget {
     File file, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     required Size imageSize,
     List<Layer>? layers,
     EdgeInsets? paddingHelper,
@@ -149,7 +149,7 @@ class PaintingEditor extends StatefulWidget {
     String assetPath, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     required Size imageSize,
     List<Layer>? layers,
     EdgeInsets? paddingHelper,
@@ -176,7 +176,7 @@ class PaintingEditor extends StatefulWidget {
     String networkUrl, {
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     required Size imageSize,
     List<Layer>? layers,
     EdgeInsets? paddingHelper,
@@ -202,7 +202,7 @@ class PaintingEditor extends StatefulWidget {
   factory PaintingEditor.autoSource({
     Key? key,
     required ThemeData theme,
-    ProImageEditorConfigs configs = const ProImageEditorConfigs(),
+    StoryEditorConfigs configs = const StoryEditorConfigs(),
     required Size imageSize,
     Uint8List? byteArray,
     File? file,

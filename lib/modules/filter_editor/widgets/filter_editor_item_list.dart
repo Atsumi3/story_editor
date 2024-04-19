@@ -27,7 +27,7 @@ class FilterEditorItemList extends StatefulWidget {
   final String? networkUrl;
 
   /// The image editor configs.
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// Specifies the scale factor for items.
   ///

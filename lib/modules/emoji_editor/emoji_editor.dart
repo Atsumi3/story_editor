@@ -19,12 +19,12 @@ import 'utils/emoji_editor_header_search.dart';
 /// as `EmojiLayerData` containing the selected emoji text.
 class EmojiEditor extends StatefulWidget {
   /// The image editor configs
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// Creates an `EmojiEditor` widget.
   const EmojiEditor({
     super.key,
-    this.configs = const ProImageEditorConfigs(),
+    this.configs = const StoryEditorConfigs(),
   });
 
   @override

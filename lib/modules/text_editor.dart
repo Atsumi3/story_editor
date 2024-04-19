@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:rounded_background_text/rounded_background_text.dart';
 import 'package:story_editor/designs/whatsapp/whatsapp_text_appbar.dart';
 import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 import 'package:story_editor/models/theme/theme.dart';
 import 'package:story_editor/utils/design_mode.dart';
-import 'package:rounded_background_text/rounded_background_text.dart';
 
 import '../designs/whatsapp/whatsapp_text_bottombar.dart';
 import '../models/layer.dart';
@@ -22,7 +22,7 @@ class TextEditor extends StatefulWidget {
   /// Configuration settings for the text editor.
   ///
   /// The image editor configs
-  final ProImageEditorConfigs configs;
+  final StoryEditorConfigs configs;
 
   /// A unique hero tag for the image.
   final String? heroTag;
@@ -44,7 +44,7 @@ class TextEditor extends StatefulWidget {
     this.heroTag,
     this.layer,
     this.onUpdateUI,
-    this.configs = const ProImageEditorConfigs(),
+    this.configs = const StoryEditorConfigs(),
     required this.theme,
   });
 
