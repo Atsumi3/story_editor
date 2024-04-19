@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/pro_image_editor_icons.dart';
+import '../../utils/story_editor_icons.dart';
 
 /// Customizable icons for the Sticker Editor component.
 class IconsStickerEditor {
@@ -21,6 +21,6 @@ class IconsStickerEditor {
   /// )
   /// ```
   const IconsStickerEditor({
-    this.bottomNavBar = ProImageEditorIcons.stickers,
+    this.bottomNavBar = StoryEditorIcons.stickers,
   });
 }

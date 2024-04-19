@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart' show ImageProvider;
 import 'package:image/image.dart';
 import 'package:image_editor/image_editor.dart';
 
-import '../../../widgets/pro_image_editor_desktop_mode.dart';
+import '../../../widgets/story_editor_desktop_mode.dart';
 
 /// Crop an image with various editing options and return it as a Uint8List.
 ///

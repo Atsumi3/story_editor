@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/models/editor_image.dart';
-import 'package:pro_image_editor/models/filter_state_history.dart';
-import 'package:pro_image_editor/models/blur_state_history.dart';
-import 'package:pro_image_editor/utils/design_mode.dart';
-import 'package:pro_image_editor/widgets/auto_image.dart';
+import 'package:story_editor/models/editor_image.dart';
+import 'package:story_editor/models/filter_state_history.dart';
+import 'package:story_editor/models/blur_state_history.dart';
+import 'package:story_editor/utils/design_mode.dart';
+import 'package:story_editor/widgets/auto_image.dart';
 
 import '../utils/generate_filtered_image.dart';
 

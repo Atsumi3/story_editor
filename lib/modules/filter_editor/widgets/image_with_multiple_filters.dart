@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/models/editor_image.dart';
-import 'package:pro_image_editor/pro_image_editor.dart';
+import 'package:story_editor/models/editor_image.dart';
+import 'package:story_editor/story_editor.dart';
 
 import '../../../models/filter_state_history.dart';
 import '../../../models/blur_state_history.dart';

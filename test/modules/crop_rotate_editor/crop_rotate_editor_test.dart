@@ -1,8 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:pro_image_editor/modules/crop_rotate_editor/crop_rotate_editor.dart';
+import 'package:story_editor/modules/crop_rotate_editor/crop_rotate_editor.dart';
 
 import '../../fake/fake_image.dart';
 
@@ -43,15 +42,14 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
       var openDialogButtonFinder =
-          find.byKey(const ValueKey('pro-image-editor-aspect-ratio-btn'));
+          find.byKey(const ValueKey('Story-Editor-aspect-ratio-btn'));
       await tester.tap(openDialogButtonFinder);
 
       // Rebuild the widget and open the dialog
       await tester.pumpAndSettle();
 
       expect(
-          find.byKey(
-              const ValueKey('pro-image-editor-aspect-ratio-bottom-list')),
+          find.byKey(const ValueKey('Story-Editor-aspect-ratio-bottom-list')),
           findsOneWidget);
 
       // Ensure to draw ratios

@@ -4,10 +4,10 @@ import 'dart:typed_data';
 import 'package:colorfilter_generator/colorfilter_generator.dart';
 import 'package:colorfilter_generator/presets.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/models/editor_configs/pro_image_editor_configs.dart';
-import 'package:pro_image_editor/models/filter_state_history.dart';
-import 'package:pro_image_editor/models/theme/theme.dart';
-import 'package:pro_image_editor/widgets/pro_image_editor_desktop_mode.dart';
+import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
+import 'package:story_editor/models/filter_state_history.dart';
+import 'package:story_editor/models/theme/theme.dart';
+import 'package:story_editor/widgets/story_editor_desktop_mode.dart';
 
 import '../../../models/blur_state_history.dart';
 import '../../../models/editor_image.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/pro_image_editor_icons.dart';
+import '../../utils/story_editor_icons.dart';
 
 /// Customizable icons for the Painting Editor component.
 class IconsPaintingEditor {
@@ -87,8 +87,8 @@ class IconsPaintingEditor {
     this.rectangle = Icons.crop_free,
     this.circle = Icons.lens_outlined,
     this.dashLine = Icons.power_input,
-    this.whatsAppStrokeWidthThin = ProImageEditorIcons.penSize1,
-    this.whatsAppStrokeWidthMedium = ProImageEditorIcons.penSize2,
-    this.whatsAppStrokeWidthBold = ProImageEditorIcons.penSize3,
+    this.whatsAppStrokeWidthThin = StoryEditorIcons.penSize1,
+    this.whatsAppStrokeWidthMedium = StoryEditorIcons.penSize2,
+    this.whatsAppStrokeWidthBold = StoryEditorIcons.penSize3,
   });
 }

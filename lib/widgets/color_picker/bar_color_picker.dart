@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/pro_image_editor.dart';
+import 'package:story_editor/story_editor.dart';
 
 import 'color_picker_configs.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/models/editor_configs/pro_image_editor_configs.dart';
-import 'package:pro_image_editor/utils/design_mode.dart';
-import 'package:pro_image_editor/widgets/pro_image_editor_desktop_mode.dart';
+import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
+import 'package:story_editor/utils/design_mode.dart';
+import 'package:story_editor/widgets/story_editor_desktop_mode.dart';
 
 /// Represents the "Done" button for the WhatsApp theme.
 class WhatsAppDoneBtn extends StatefulWidget {

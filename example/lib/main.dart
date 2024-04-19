@@ -1,17 +1,14 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:math';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' hide Category;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pro_image_editor/pro_image_editor.dart';
-import 'package:pro_image_editor/widgets/loading_dialog.dart';
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:story_editor/story_editor.dart';
+import 'package:story_editor/widgets/loading_dialog.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pro-Image-Editor',
+      title: 'Story-Editor',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue.shade800),
         useMaterial3: true,
@@ -54,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pro-Image-Editor'),
+        title: const Text('Story-Editor'),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -62,51 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // カスタム
               OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ProImageEditor.asset(
-                        'assets/demo.png',
-                        onImageEditingComplete: (bytes) async {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.folder_outlined),
-                label: const Text('Editor from Asset'),
-              ),
-              const SizedBox(height: 30),
-              if (!kIsWeb) ...[
-                OutlinedButton.icon(
-                  onPressed: () async {
-                    FilePickerResult? result =
-                        await FilePicker.platform.pickFiles(
-                      type: FileType.image,
-                    );
-
-                    if (result != null && context.mounted) {
-                      File file = File(result.files.single.path!);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ProImageEditor.file(
-                            file,
-                            onImageEditingComplete: (Uint8List bytes) async {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                  icon: const Icon(Icons.sd_card_outlined),
-                  label: const Text('Editor from File'),
-                ),
-                const SizedBox(height: 30),
-              ],
-              OutlinedButton.icon(
+                label: const Text('Editor from history'),
+                icon: const Icon(Icons.history),
                 onPressed: () async {
                   LoadingDialog loading = LoadingDialog()
                     ..show(
@@ -131,8 +87,30 @@ class _MyHomePageState extends State<MyHomePage> {
                           key: _editor,
                           onImageEditingComplete: (bytes) async {
                             Navigator.pop(context);
+                            final history = await _editor.currentState
+                                ?.exportStateHistory(
+                                  // All configurations are optional
+                                  configs: const ExportEditorConfigs(
+                                    exportPainting: true,
+                                    exportText: true,
+                                    exportCropRotate: false,
+                                    exportFilter: false,
+                                    exportEmoji: true,
+                                    exportSticker: true,
+                                    historySpan: ExportHistorySpan.current,
+                                  ),
+                                )
+                                .toMap();
+                            debugPrint(history.toString());
                           },
                           configs: ProImageEditorConfigs(
+                            // customWidgets: ImageEditorCustomWidgets(
+                            //     bottomNavigationBar: Container(
+                            //   color: Colors.teal.shade100,
+                            //   child: const Text('Custom Bottom Navigation Bar'),
+                            // )
+                            //     // bottomBar: const SizedBox.shrink(),
+                            //     ),
                             i18n: const I18n(
                               various: I18nVarious(
                                 loadingDialogMsg: 'Please wait...',
@@ -159,87 +137,87 @@ class _MyHomePageState extends State<MyHomePage> {
                                 smallScreenMoreTooltip: 'More',
                               ),
                               textEditor: I18nTextEditor(
-                                inputHintText: 'Enter text',
-                                bottomNavigationBarText: 'Text',
+                                inputHintText: '|',
+                                bottomNavigationBarText: '文字',
                                 back: 'Back',
                                 done: 'Done',
                                 textAlign: 'Align text',
                                 backgroundMode: 'Background mode',
                                 smallScreenMoreTooltip: 'More',
                               ),
-                              cropRotateEditor: I18nCropRotateEditor(
-                                bottomNavigationBarText: 'Crop/ Rotate',
-                                rotate: 'Rotate',
-                                ratio: 'Ratio',
-                                back: 'Back',
-                                done: 'Done',
-                                prepareImageDialogMsg: 'Please wait',
-                                applyChangesDialogMsg: 'Please wait',
-                                smallScreenMoreTooltip: 'More',
-                              ),
-                              filterEditor: I18nFilterEditor(
-                                applyFilterDialogMsg:
-                                    'Filter is being applied.',
-                                bottomNavigationBarText: 'Filter',
-                                back: 'Back',
-                                done: 'Done',
-                                filters: I18nFilters(
-                                  none: 'No Filter',
-                                  addictiveBlue: 'AddictiveBlue',
-                                  addictiveRed: 'AddictiveRed',
-                                  aden: 'Aden',
-                                  amaro: 'Amaro',
-                                  ashby: 'Ashby',
-                                  brannan: 'Brannan',
-                                  brooklyn: 'Brooklyn',
-                                  charmes: 'Charmes',
-                                  clarendon: 'Clarendon',
-                                  crema: 'Crema',
-                                  dogpatch: 'Dogpatch',
-                                  earlybird: 'Earlybird',
-                                  f1977: '1977',
-                                  gingham: 'Gingham',
-                                  ginza: 'Ginza',
-                                  hefe: 'Hefe',
-                                  helena: 'Helena',
-                                  hudson: 'Hudson',
-                                  inkwell: 'Inkwell',
-                                  juno: 'Juno',
-                                  kelvin: 'Kelvin',
-                                  lark: 'Lark',
-                                  loFi: 'Lo-Fi',
-                                  ludwig: 'Ludwig',
-                                  maven: 'Maven',
-                                  mayfair: 'Mayfair',
-                                  moon: 'Moon',
-                                  nashville: 'Nashville',
-                                  perpetua: 'Perpetua',
-                                  reyes: 'Reyes',
-                                  rise: 'Rise',
-                                  sierra: 'Sierra',
-                                  skyline: 'Skyline',
-                                  slumber: 'Slumber',
-                                  stinson: 'Stinson',
-                                  sutro: 'Sutro',
-                                  toaster: 'Toaster',
-                                  valencia: 'Valencia',
-                                  vesper: 'Vesper',
-                                  walden: 'Walden',
-                                  willow: 'Willow',
-                                  xProII: 'Pro II',
-                                ),
-                              ),
-                              blurEditor: I18nBlurEditor(
-                                applyBlurDialogMsg: 'Blur is being applied.',
-                                bottomNavigationBarText: 'Blur',
-                                back: 'Back',
-                                done: 'Done',
-                              ),
+                              // cropRotateEditor: I18nCropRotateEditor(
+                              //   bottomNavigationBarText: 'Crop/ Rotate',
+                              //   rotate: 'Rotate',
+                              //   ratio: 'Ratio',
+                              //   back: 'Back',
+                              //   done: 'Done',
+                              //   prepareImageDialogMsg: 'Please wait',
+                              //   applyChangesDialogMsg: 'Please wait',
+                              //   smallScreenMoreTooltip: 'More',
+                              // ),
+                              // filterEditor: I18nFilterEditor(
+                              //   applyFilterDialogMsg:
+                              //       'Filter is being applied.',
+                              //   bottomNavigationBarText: 'Filter',
+                              //   back: 'Back',
+                              //   done: 'Done',
+                              //   filters: I18nFilters(
+                              //     none: 'No Filter',
+                              //     addictiveBlue: 'AddictiveBlue',
+                              //     addictiveRed: 'AddictiveRed',
+                              //     aden: 'Aden',
+                              //     amaro: 'Amaro',
+                              //     ashby: 'Ashby',
+                              //     brannan: 'Brannan',
+                              //     brooklyn: 'Brooklyn',
+                              //     charmes: 'Charmes',
+                              //     clarendon: 'Clarendon',
+                              //     crema: 'Crema',
+                              //     dogpatch: 'Dogpatch',
+                              //     earlybird: 'Earlybird',
+                              //     f1977: '1977',
+                              //     gingham: 'Gingham',
+                              //     ginza: 'Ginza',
+                              //     hefe: 'Hefe',
+                              //     helena: 'Helena',
+                              //     hudson: 'Hudson',
+                              //     inkwell: 'Inkwell',
+                              //     juno: 'Juno',
+                              //     kelvin: 'Kelvin',
+                              //     lark: 'Lark',
+                              //     loFi: 'Lo-Fi',
+                              //     ludwig: 'Ludwig',
+                              //     maven: 'Maven',
+                              //     mayfair: 'Mayfair',
+                              //     moon: 'Moon',
+                              //     nashville: 'Nashville',
+                              //     perpetua: 'Perpetua',
+                              //     reyes: 'Reyes',
+                              //     rise: 'Rise',
+                              //     sierra: 'Sierra',
+                              //     skyline: 'Skyline',
+                              //     slumber: 'Slumber',
+                              //     stinson: 'Stinson',
+                              //     sutro: 'Sutro',
+                              //     toaster: 'Toaster',
+                              //     valencia: 'Valencia',
+                              //     vesper: 'Vesper',
+                              //     walden: 'Walden',
+                              //     willow: 'Willow',
+                              //     xProII: 'Pro II',
+                              //   ),
+                              // ),
+                              // blurEditor: I18nBlurEditor(
+                              //   applyBlurDialogMsg: 'Blur is being applied.',
+                              //   bottomNavigationBarText: 'Blur',
+                              //   back: 'Back',
+                              //   done: 'Done',
+                              // ),
                               emojiEditor: I18nEmojiEditor(
                                 bottomNavigationBarText: 'Emoji',
                               ),
                               stickerEditor: I18nStickerEditor(
-                                bottomNavigationBarText: 'I18nStickerEditor',
+                                bottomNavigationBarText: 'Sticker',
                               ),
                               cancel: 'Cancel',
                               undo: 'Undo',
@@ -254,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               showRotateLine: true,
                               hitVibration: true,
                             ),
-                            customWidgets: const ImageEditorCustomWidgets(),
+                            // customWidgets: const ImageEditorCustomWidgets(),
                             imageEditorTheme: const ImageEditorTheme(
                               layerHoverCursor: SystemMouseCursors.move,
                               helperLine: HelperLineTheme(
@@ -383,7 +361,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             cropRotateEditorConfigs:
                                 const CropRotateEditorConfigs(
-                              enabled: true,
+                              enabled: false,
                               canRotate: true,
                               canChangeAspectRatio: true,
                               initAspectRatio: 0.0,
@@ -402,11 +380,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               ],
                             ),
                             filterEditorConfigs: FilterEditorConfigs(
-                              enabled: true,
+                              enabled: false,
                               filterList: presetFiltersList,
                             ),
                             blurEditorConfigs: const BlurEditorConfigs(
-                              enabled: true,
+                              enabled: false,
                               maxBlur: 3.0,
                             ),
                             emojiEditorConfigs: const EmojiEditorConfigs(
@@ -428,6 +406,79 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ], */
                             ),
+                            stickerEditorConfigs: StickerEditorConfigs(
+                              enabled: true,
+                              onSearchChanged: (value) {
+                                /// Filter your stickers
+                                debugPrint(value);
+                              },
+                              buildStickers: (setLayer) {
+                                List<String> demoTitels = [
+                                  'Recent',
+                                  'Favorites',
+                                  'Shapes',
+                                  'Funny',
+                                  'Boring',
+                                  'Frog',
+                                  'Snow',
+                                  'More'
+                                ];
+                                List<Widget> slivers = [];
+                                int offset = 0;
+                                for (var element in demoTitels) {
+                                  slivers.addAll([
+                                    _buildDemoStickersTitle(element),
+                                    _buildDemoStickers(offset, setLayer),
+                                    const SliverToBoxAdapter(
+                                        child: SizedBox(height: 20)),
+                                  ]);
+                                  offset += 20;
+                                }
+
+                                return Column(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            8.0, 8.0, 8.0, 0),
+                                        child: CustomScrollView(
+                                          slivers: slivers,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 50,
+                                      color: Colors.grey.shade800,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                                Icons.watch_later_outlined),
+                                            color: Colors.white,
+                                          ),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(Icons.mood),
+                                            color: Colors.white,
+                                          ),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(Icons.pets),
+                                            color: Colors.white,
+                                          ),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(Icons.coronavirus),
+                                            color: Colors.white,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
                             designMode: ImageEditorDesignModeE.material,
                             heroTag: 'hero',
                             theme: ThemeData(
@@ -443,158 +494,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   }
                 },
-                icon: const Icon(Icons.memory_outlined),
-                label: const Text('Editor from memory'),
               ),
-              const SizedBox(height: 30),
-              OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProImageEditor.network(
-                        'https://picsum.photos/id/237/2000',
-                        onImageEditingComplete: (byte) async {
-                          Navigator.pop(context);
-                        },
-                        configs: const ProImageEditorConfigs(
-                          blurEditorConfigs: BlurEditorConfigs(
-                            maxBlur: 5,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.public_outlined),
-                label: const Text('Editor from network'),
-              ),
-              const SizedBox(height: 30),
-              OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ProImageEditor.network(
-                        'https://picsum.photos/id/176/2000',
-                        onImageEditingComplete: (bytes) async {
-                          Navigator.pop(context);
-                        },
-                        configs: ProImageEditorConfigs(
-                          stickerEditorConfigs: StickerEditorConfigs(
-                            enabled: true,
-                            buildStickers: (setLayer) {
-                              return ClipRRect(
-                                borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(20)),
-                                child: Container(
-                                  color:
-                                      const Color.fromARGB(255, 224, 239, 251),
-                                  child: GridView.builder(
-                                    padding: const EdgeInsets.all(16),
-                                    gridDelegate:
-                                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent: 150,
-                                      mainAxisSpacing: 10,
-                                      crossAxisSpacing: 10,
-                                    ),
-                                    itemCount: 21,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) {
-                                      Widget widget = ClipRRect(
-                                        borderRadius: BorderRadius.circular(7),
-                                        child: Image.network(
-                                          'https://picsum.photos/id/${(index + 3) * 3}/2000',
-                                          width: 120,
-                                          height: 120,
-                                          fit: BoxFit.cover,
-                                          loadingBuilder: (context, child,
-                                              loadingProgress) {
-                                            return AnimatedSwitcher(
-                                              layoutBuilder: (currentChild,
-                                                  previousChildren) {
-                                                return SizedBox(
-                                                  width: 120,
-                                                  height: 120,
-                                                  child: Stack(
-                                                    fit: StackFit.expand,
-                                                    alignment: Alignment.center,
-                                                    children: <Widget>[
-                                                      ...previousChildren,
-                                                      if (currentChild != null)
-                                                        currentChild,
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                              duration: const Duration(
-                                                  milliseconds: 200),
-                                              child: loadingProgress == null
-                                                  ? child
-                                                  : Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        value: loadingProgress
-                                                                    .expectedTotalBytes !=
-                                                                null
-                                                            ? loadingProgress
-                                                                    .cumulativeBytesLoaded /
-                                                                loadingProgress
-                                                                    .expectedTotalBytes!
-                                                            : null,
-                                                      ),
-                                                    ),
-                                            );
-                                          },
-                                        ),
-                                      );
-                                      return GestureDetector(
-                                        onTap: () => setLayer(widget),
-                                        child: MouseRegion(
-                                          cursor: SystemMouseCursors.click,
-                                          child: widget,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.layers_outlined),
-                label: const Text('Editor with Stickers'),
-              ),
-              const SizedBox(height: 30),
-              OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ProImageEditor.asset(
-                        'assets/demo.png',
-                        onImageEditingComplete: (bytes) async {
-                          Navigator.pop(context);
-                        },
-                        configs: ProImageEditorConfigs(
-                          emojiEditorConfigs: EmojiEditorConfigs(
-                            checkPlatformCompatibility: false,
-                            textStyle: DefaultEmojiTextStyle.copyWith(
-                              fontFamily:
-                                  GoogleFonts.notoColorEmoji().fontFamily,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.emoji_emotions_outlined),
-                label: const Text('Google-Font Emojis'),
-              ),
-              const SizedBox(height: 30),
+              // WhatApp Theme
               OutlinedButton.icon(
                 onPressed: () {
                   Navigator.of(context).push(

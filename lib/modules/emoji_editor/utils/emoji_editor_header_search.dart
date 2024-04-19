@@ -1,7 +1,7 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/models/i18n/i18n.dart';
-import 'package:pro_image_editor/models/theme/theme_shared_values.dart';
+import 'package:story_editor/models/i18n/i18n.dart';
+import 'package:story_editor/models/theme/theme_shared_values.dart';
 
 class EmojiEditorHeaderSearchView extends SearchView {
   final I18n i18n;

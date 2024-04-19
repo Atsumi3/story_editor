@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pro_image_editor/models/filter_state_history.dart';
-import 'package:pro_image_editor/models/blur_state_history.dart';
-import 'package:pro_image_editor/pro_image_editor.dart';
+import 'package:story_editor/models/filter_state_history.dart';
+import 'package:story_editor/models/blur_state_history.dart';
+import 'package:story_editor/story_editor.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../../models/editor_image.dart';

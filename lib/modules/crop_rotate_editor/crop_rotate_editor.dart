@@ -5,20 +5,20 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/services.dart';
-import 'package:pro_image_editor/designs/whatsapp/whatsapp_crop_rotate_toolbar.dart';
-import 'package:pro_image_editor/models/editor_configs/pro_image_editor_configs.dart';
-import 'package:pro_image_editor/models/theme/theme.dart';
+import 'package:story_editor/designs/whatsapp/whatsapp_crop_rotate_toolbar.dart';
+import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
+import 'package:story_editor/models/theme/theme.dart';
 
+import '../../models/aspect_ratio_item.dart';
 import '../../models/crop_rotate_editor_response.dart';
 import '../../models/editor_image.dart';
-import '../../widgets/auto_image.dart';
-import '../../widgets/platform_popup_menu.dart';
-import 'utils/crop_rotate_editor_helper.dart';
 import '../../utils/design_mode.dart';
-import 'utils/aspect_ratio_button.dart';
-import '../../models/aspect_ratio_item.dart';
+import '../../widgets/auto_image.dart';
 import '../../widgets/flat_icon_text_button.dart';
 import '../../widgets/loading_dialog.dart';
+import '../../widgets/platform_popup_menu.dart';
+import 'utils/aspect_ratio_button.dart';
+import 'utils/crop_rotate_editor_helper.dart';
 
 /// The `CropRotateEditor` widget is used for cropping and rotating images.
 /// It provides various constructors for loading images from different sources and allows users to crop and rotate the image.
@@ -488,7 +488,7 @@ class CropRotateEditorState extends State<CropRotateEditor> {
         context: context,
         builder: (BuildContext context) {
           return Column(
-            key: const ValueKey('pro-image-editor-aspect-ratio-bottom-list'),
+            key: const ValueKey('Story-Editor-aspect-ratio-bottom-list'),
             children: <Widget>[
               const Expanded(
                 child: SizedBox(),
@@ -611,8 +611,7 @@ class CropRotateEditorState extends State<CropRotateEditor> {
                     if (widget
                         .configs.cropRotateEditorConfigs.canChangeAspectRatio)
                       IconButton(
-                        key:
-                            const ValueKey('pro-image-editor-aspect-ratio-btn'),
+                        key: const ValueKey('Story-Editor-aspect-ratio-btn'),
                         icon: Icon(
                             widget.configs.icons.cropRotateEditor.aspectRatio),
                         tooltip: widget.configs.i18n.cropRotateEditor.ratio,

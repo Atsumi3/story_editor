@@ -1,11 +1,10 @@
-name: pro_image_editor
+name: story_editor
 description: "A Flutter image editor: Seamlessly enhance your images with user-friendly editing features."
 version: 2.6.2
-homepage: https://github.com/hm21/pro_image_editor/
-repository: https://github.com/hm21/pro_image_editor/
-issue_tracker: https://github.com/hm21/pro_image_editor/issues/
-documentation: https://github.com/hm21/pro_image_editor/
-
+homepage: https://github.com/atsumo/story_editor/
+repository: https://github.com/atsumo/story_editor/
+issue_tracker: https://github.com/atsumo/story_editor/issues/
+documentation: https://github.com/atsumo/story_editor/
 
 topics:
   - image-editor
@@ -13,11 +12,13 @@ topics:
   - editor
   - widget
   - painting
+  - story
+  - editor
 
 screenshots:
-  - description: "Showcase from the image editor with the Whatsapp design"
+  - description: "Showcase from the story editor with the Whatsapp design"
     path: assets/showcase-whatsapp.png
-  - description: "Showcase from the image editor with simple design"
+  - description: "Showcase from the story editor with simple design"
     path: assets/showcase.png
 
 platforms:
@@ -29,8 +30,8 @@ platforms:
   windows:
 
 environment:
-  sdk: '>=3.2.2 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: ">=3.2.2 <4.0.0"
+  flutter: ">=3.19.0"
 
 dependencies:
   flutter:
@@ -56,6 +57,6 @@ dev_dependencies:
 
 flutter:
   fonts:
-   - family: ProImageEditorIcons
-     fonts:
-      - asset: lib/fonts/ProImageEditorIcons.ttf
+    - family: ProImageEditorIcons
+      fonts:
+        - asset: lib/fonts/ProImageEditorIcons.ttf

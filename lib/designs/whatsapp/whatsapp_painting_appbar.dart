@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/models/editor_configs/pro_image_editor_configs.dart';
+import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 
 import 'utils/whatsapp_appbar_button_style.dart';
 import 'whatsapp_done_btn.dart';

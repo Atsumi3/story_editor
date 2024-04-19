@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:pro_image_editor/models/theme/theme_sticker_editor.dart';
+import 'package:story_editor/models/theme/theme_sticker_editor.dart';
 
 import 'theme_adaptive_dialog.dart';
 import 'theme_crop_rotate_editor.dart';

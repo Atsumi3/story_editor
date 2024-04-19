@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/utils/design_mode.dart';
+import 'package:story_editor/utils/design_mode.dart';
 
 import '../models/theme/theme.dart';
 

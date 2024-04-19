@@ -1,9 +1,9 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pro_image_editor/models/editor_configs/emoji_editor_configs.dart';
-import 'package:pro_image_editor/models/editor_configs/pro_image_editor_configs.dart';
-import 'package:pro_image_editor/modules/emoji_editor/emoji_editor.dart';
+import 'package:story_editor/models/editor_configs/emoji_editor_configs.dart';
+import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
+import 'package:story_editor/modules/emoji_editor/emoji_editor.dart';
 
 void main() {
   group('EmojiEditor Tests', () {

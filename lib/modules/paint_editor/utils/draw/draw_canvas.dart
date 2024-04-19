@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/modules/paint_editor/utils/paint_editor_enum.dart';
+import 'package:story_editor/modules/paint_editor/utils/paint_editor_enum.dart';
 
 import '../../../../models/paint_editor/painted_model.dart';
-import '../../../../widgets/pro_image_editor_desktop_mode.dart';
+import '../../../../widgets/story_editor_desktop_mode.dart';
 import 'drawers/draw_element.dart';
 
 /// Handles the painting ongoing on the canvas.

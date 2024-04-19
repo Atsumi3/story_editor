@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/designs/whatsapp/whatsapp_text_appbar.dart';
-import 'package:pro_image_editor/models/editor_configs/pro_image_editor_configs.dart';
-import 'package:pro_image_editor/models/theme/theme.dart';
-import 'package:pro_image_editor/utils/design_mode.dart';
+import 'package:story_editor/designs/whatsapp/whatsapp_text_appbar.dart';
+import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
+import 'package:story_editor/models/theme/theme.dart';
+import 'package:story_editor/utils/design_mode.dart';
 import 'package:rounded_background_text/rounded_background_text.dart';
 
 import '../designs/whatsapp/whatsapp_text_bottombar.dart';
@@ -15,7 +15,7 @@ import '../widgets/color_picker/bar_color_picker.dart';
 import '../widgets/color_picker/color_picker_configs.dart';
 import '../widgets/layer_widget.dart';
 import '../widgets/platform_popup_menu.dart';
-import '../widgets/pro_image_editor_desktop_mode.dart';
+import '../widgets/story_editor_desktop_mode.dart';
 
 /// A StatefulWidget that provides a text editing interface for adding and editing text layers.
 class TextEditor extends StatefulWidget {

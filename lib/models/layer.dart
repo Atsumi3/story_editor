@@ -120,6 +120,7 @@ class Layer {
           scale: layer.scale,
           sticker: sticker,
         );
+      case 'lottie':
       default:
         return layer;
     }

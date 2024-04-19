@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pro_image_editor/utils/theme_functions.dart';
+import 'package:story_editor/utils/theme_functions.dart';
 import 'package:rounded_background_text/rounded_background_text.dart';
 
 import '../models/i18n/i18n.dart';
@@ -12,7 +12,7 @@ import '../modules/paint_editor/utils/draw/draw_canvas.dart';
 import '../modules/paint_editor/utils/paint_editor_enum.dart';
 import '../utils/design_mode.dart';
 import 'dashed_border.dart';
-import 'pro_image_editor_desktop_mode.dart';
+import 'story_editor_desktop_mode.dart';
 
 /// A widget representing a layer within a design canvas.
 class LayerWidget extends StatefulWidget {

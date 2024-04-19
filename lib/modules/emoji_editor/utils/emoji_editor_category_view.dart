@@ -1,6 +1,6 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/modules/emoji_editor/utils/emoji_editor_bottom_bar.dart';
+import 'package:story_editor/modules/emoji_editor/utils/emoji_editor_bottom_bar.dart';
 
 class EmojiEditorCategoryView extends CategoryView {
   const EmojiEditorCategoryView(

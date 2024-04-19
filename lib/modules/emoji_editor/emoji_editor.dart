@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/models/editor_configs/pro_image_editor_configs.dart';
-import 'package:pro_image_editor/models/theme/theme.dart';
-import 'package:pro_image_editor/modules/emoji_editor/utils/emoji_editor_category_view.dart';
+import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
+import 'package:story_editor/models/theme/theme.dart';
+import 'package:story_editor/modules/emoji_editor/utils/emoji_editor_category_view.dart';
 
 import '../../models/layer.dart';
 import '../../models/theme/theme_shared_values.dart';

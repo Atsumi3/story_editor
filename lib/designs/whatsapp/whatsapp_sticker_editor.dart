@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_image_editor/modules/emoji_editor/emoji_editor.dart';
-import 'package:pro_image_editor/modules/sticker_editor.dart';
-import 'package:pro_image_editor/utils/design_mode.dart';
+import 'package:story_editor/modules/emoji_editor/emoji_editor.dart';
+import 'package:story_editor/modules/sticker_editor.dart';
+import 'package:story_editor/utils/design_mode.dart';
 
-import '../../models/editor_configs/pro_image_editor_configs.dart';
+import '../../models/editor_configs/story_editor_configs.dart';
 
 /// Represents the temporary sticker mode for WhatsApp.
 ///

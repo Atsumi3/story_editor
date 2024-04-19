@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pro_image_editor/models/i18n/i18n.dart';
-import 'package:pro_image_editor/models/layer.dart';
-import 'package:pro_image_editor/utils/design_mode.dart';
-import 'package:pro_image_editor/widgets/layer_widget.dart';
+import 'package:story_editor/models/i18n/i18n.dart';
+import 'package:story_editor/models/layer.dart';
+import 'package:story_editor/utils/design_mode.dart';
+import 'package:story_editor/widgets/layer_widget.dart';
 
 void main() {
   testWidgets('LayerWidget test', (WidgetTester tester) async {
