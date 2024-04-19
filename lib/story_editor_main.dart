@@ -44,7 +44,7 @@ import 'widgets/layer_widget.dart';
 import 'widgets/loading_dialog.dart';
 import 'widgets/story_editor_desktop_mode.dart';
 
-typedef ImageEditingCompleteCallback = Future<void> Function(Uint8List bytes);
+typedef StoryEditingCompleteCallback = Future<void> Function(Uint8List bytes);
 
 /// A widget for image editing using StoryEditor.
 ///
@@ -82,16 +82,8 @@ class StoryEditor extends StatefulWidget {
   /// File object representing the image file.
   final File? file;
 
-  /// A callback function that will be called when the editing is done,
-  /// and it returns the edited image as a Uint8List.
-  ///
-  /// The edited image is provided as a Uint8List to the [onImageEditingComplete] function
-  /// when the editing is completed.
-  final ImageEditingCompleteCallback onImageEditingComplete;
+  final StoryEditingCompleteCallback onStoryEditingComplete;
 
-  /// Whether [onImageEditingComplete] call with empty editing.
-  ///
-  /// The default value is false.
   final bool? allowCompleteWithEmptyEditing;
 
   /// A callback function that will be called before the image editor will close.
@@ -114,11 +106,11 @@ class StoryEditor extends StatefulWidget {
   /// The `configs` parameter allows you to customize the image editing experience by providing
   /// various configuration options. If not specified, default settings will be used.
   ///
-  /// The `onImageEditingComplete` parameter is a callback function that will be called when the editing is done,
+  /// The `onStoryEditingComplete` parameter is a callback function that will be called when the editing is done,
   /// and it returns the edited image as a Uint8List.
   ///
   /// If `allowCompleteWithEmptyEditing` parameter is true,
-  /// `onImageEditingComplete` will be called even if user done nothing to image.
+  /// `onStoryEditingComplete` will be called even if user done nothing to image.
   /// The default value is false.
   ///
   /// The `onCloseEditor` parameter is a callback function that gets invoked when the editor is closed.
@@ -128,7 +120,7 @@ class StoryEditor extends StatefulWidget {
   /// The `onUpdateUI` parameter is a callback function that can be used to update the UI from custom widgets.
   const StoryEditor._({
     super.key,
-    required this.onImageEditingComplete,
+    required this.onStoryEditingComplete,
     this.allowCompleteWithEmptyEditing,
     this.onCloseEditor,
     this.onUpdateUI,
@@ -152,11 +144,11 @@ class StoryEditor extends StatefulWidget {
   /// The `configs` parameter allows you to customize the image editing experience by providing
   /// various configuration options. If not specified, default settings will be used.
   ///
-  /// The `onImageEditingComplete` parameter is a callback function that will be called when the editing is done,
+  /// The `onStoryEditingComplete` parameter is a callback function that will be called when the editing is done,
   /// and it returns the edited image as a Uint8List.
   ///
   /// If `allowCompleteWithEmptyEditing` parameter is true,
-  /// `onImageEditingComplete` will be called even if user done nothing to image.
+  /// `onStoryEditingComplete` will be called even if user done nothing to image.
   /// The default value is false.
   ///
   /// The `onCloseEditor` parameter is a callback function that gets invoked when the editor is closed.
@@ -167,7 +159,7 @@ class StoryEditor extends StatefulWidget {
   factory StoryEditor.memory(
     Uint8List byteArray, {
     Key? key,
-    required ImageEditingCompleteCallback onImageEditingComplete,
+    required StoryEditingCompleteCallback onStoryEditingComplete,
     bool? allowCompleteWithEmptyEditing,
     Function? onUpdateUI,
     Function? onCloseEditor,
@@ -177,7 +169,7 @@ class StoryEditor extends StatefulWidget {
       key: key,
       byteArray: byteArray,
       configs: configs,
-      onImageEditingComplete: onImageEditingComplete,
+      onStoryEditingComplete: onStoryEditingComplete,
       allowCompleteWithEmptyEditing: allowCompleteWithEmptyEditing,
       onCloseEditor: onCloseEditor,
       onUpdateUI: onUpdateUI,
@@ -191,11 +183,11 @@ class StoryEditor extends StatefulWidget {
   /// The `configs` parameter allows you to customize the image editing experience by providing
   /// various configuration options. If not specified, default settings will be used.
   ///
-  /// The `onImageEditingComplete` parameter is a callback function that will be called when the editing is done,
+  /// The `onStoryEditingComplete` parameter is a callback function that will be called when the editing is done,
   /// and it returns the edited image as a Uint8List.
   ///
   /// If `allowCompleteWithEmptyEditing` parameter is true,
-  /// `onImageEditingComplete` will be called even if user done nothing to image.
+  /// `onStoryEditingComplete` will be called even if user done nothing to image.
   /// The default value is false.
   ///
   /// The `onCloseEditor` parameter is a callback function that gets invoked when the editor is closed.
@@ -207,7 +199,7 @@ class StoryEditor extends StatefulWidget {
     File file, {
     Key? key,
     StoryEditorConfigs configs = const StoryEditorConfigs(),
-    required ImageEditingCompleteCallback onImageEditingComplete,
+    required StoryEditingCompleteCallback onStoryEditingComplete,
     bool? allowCompleteWithEmptyEditing,
     Function? onUpdateUI,
     Function? onCloseEditor,
@@ -216,7 +208,7 @@ class StoryEditor extends StatefulWidget {
       key: key,
       file: file,
       configs: configs,
-      onImageEditingComplete: onImageEditingComplete,
+      onStoryEditingComplete: onStoryEditingComplete,
       allowCompleteWithEmptyEditing: allowCompleteWithEmptyEditing,
       onCloseEditor: onCloseEditor,
       onUpdateUI: onUpdateUI,
@@ -230,11 +222,11 @@ class StoryEditor extends StatefulWidget {
   /// The `configs` parameter allows you to customize the image editing experience by providing
   /// various configuration options. If not specified, default settings will be used.
   ///
-  /// The `onImageEditingComplete` parameter is a callback function that will be called when the editing is done,
+  /// The `onStoryEditingComplete` parameter is a callback function that will be called when the editing is done,
   /// and it returns the edited image as a Uint8List.
   ///
   /// If `allowCompleteWithEmptyEditing` parameter is true,
-  /// `onImageEditingComplete` will be called even if user done nothing to image.
+  /// `onStoryEditingComplete` will be called even if user done nothing to image.
   /// The default value is false.
   ///
   /// The `onCloseEditor` parameter is a callback function that gets invoked when the editor is closed.
@@ -246,7 +238,7 @@ class StoryEditor extends StatefulWidget {
     String assetPath, {
     Key? key,
     StoryEditorConfigs configs = const StoryEditorConfigs(),
-    required ImageEditingCompleteCallback onImageEditingComplete,
+    required StoryEditingCompleteCallback onStoryEditingComplete,
     bool? allowCompleteWithEmptyEditing,
     Function? onUpdateUI,
     Function? onCloseEditor,
@@ -255,7 +247,7 @@ class StoryEditor extends StatefulWidget {
       key: key,
       assetPath: assetPath,
       configs: configs,
-      onImageEditingComplete: onImageEditingComplete,
+      onStoryEditingComplete: onStoryEditingComplete,
       allowCompleteWithEmptyEditing: allowCompleteWithEmptyEditing,
       onCloseEditor: onCloseEditor,
       onUpdateUI: onUpdateUI,
@@ -269,11 +261,11 @@ class StoryEditor extends StatefulWidget {
   /// The `configs` parameter allows you to customize the image editing experience by providing
   /// various configuration options. If not specified, default settings will be used.
   ///
-  /// The `onImageEditingComplete` parameter is a callback function that will be called when the editing is done,
+  /// The `onStoryEditingComplete` parameter is a callback function that will be called when the editing is done,
   /// and it returns the edited image as a Uint8List.
   ///
   /// If `allowCompleteWithEmptyEditing` parameter is true,
-  /// `onImageEditingComplete` will be called even if user done nothing to image.
+  /// `onStoryEditingComplete` will be called even if user done nothing to image.
   /// The default value is false.
   ///
   /// The `onCloseEditor` parameter is a callback function that gets invoked when the editor is closed.
@@ -285,7 +277,7 @@ class StoryEditor extends StatefulWidget {
     String networkUrl, {
     Key? key,
     StoryEditorConfigs configs = const StoryEditorConfigs(),
-    required ImageEditingCompleteCallback onImageEditingComplete,
+    required StoryEditingCompleteCallback onStoryEditingComplete,
     bool? allowCompleteWithEmptyEditing,
     Function? onUpdateUI,
     Function? onCloseEditor,
@@ -294,7 +286,7 @@ class StoryEditor extends StatefulWidget {
       key: key,
       networkUrl: networkUrl,
       configs: configs,
-      onImageEditingComplete: onImageEditingComplete,
+      onStoryEditingComplete: onStoryEditingComplete,
       allowCompleteWithEmptyEditing: allowCompleteWithEmptyEditing,
       onCloseEditor: onCloseEditor,
       onUpdateUI: onUpdateUI,
@@ -1768,7 +1760,7 @@ class StoryEditorState extends State<StoryEditor> {
       bytes = await _screenshotCtrl.capture(pixelRatio: _pixelRatio) ?? bytes;
     } catch (_) {}
 
-    await widget.onImageEditingComplete(bytes);
+    await widget.onStoryEditingComplete(bytes);
 
     if (mounted) loading.hide(context);
 

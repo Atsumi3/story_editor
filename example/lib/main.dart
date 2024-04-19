@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => StoryEditor.memory(
                           bytes,
                           key: _editor,
-                          onImageEditingComplete: (bytes) async {
+                          onStoryEditingComplete: (bytes) async {
                             Navigator.pop(context);
                             final history = await _editor.currentState
                                 ?.exportStateHistory(
@@ -502,7 +502,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     MaterialPageRoute(
                       builder: (context) => StoryEditor.network(
                         'https://picsum.photos/id/350/1500/3000',
-                        onImageEditingComplete: (bytes) async {
+                        onStoryEditingComplete: (bytes) async {
                           Navigator.pop(context);
                         },
                         configs: StoryEditorConfigs(
