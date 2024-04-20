@@ -762,6 +762,8 @@ class StoryEditorState extends State<StoryEditor> {
       return _createCopyPaintingLayer(layer);
     } else if (layer is StickerLayerData) {
       return _createCopyStickerLayer(layer);
+    } else if (layer is EffectLayerData) {
+      return _createCopyEffectLayer(layer);
     } else {
       return layer;
     }
@@ -810,6 +812,18 @@ class StoryEditorState extends State<StoryEditor> {
       scale: layer.scale,
       flipX: layer.flipX,
       flipY: layer.flipY,
+    );
+  }
+
+  EffectLayerData _createCopyEffectLayer(EffectLayerData layer) {
+    return EffectLayerData(
+      id: layer.id,
+      offset: Offset(layer.offset.dx, layer.offset.dy),
+      rotation: layer.rotation,
+      scale: layer.scale,
+      flipX: layer.flipX,
+      flipY: layer.flipY,
+      effect: layer.effect,
     );
   }
 
@@ -1918,10 +1932,11 @@ class StoryEditorState extends State<StoryEditor> {
             _screenSizeDebouncer(() {
               _decodeImage();
             });
-            _lastScreenSize = Size(
-              constraints.maxWidth,
-              constraints.maxHeight,
-            );
+            // _lastScreenSize = Size(
+            //   constraints.maxWidth,
+            //   constraints.maxHeight,
+            // );
+            _lastScreenSize = MediaQuery.of(context).size;
           }
           return AnnotatedRegion<SystemUiOverlayStyle>(
             value: widget.configs.imageEditorTheme.uiOverlayStyle,

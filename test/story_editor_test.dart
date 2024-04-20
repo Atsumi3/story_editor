@@ -17,7 +17,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: StoryEditor.memory(
         fakeMemoryImage,
-        onImageEditingComplete: (Uint8List bytes) async {},
+        onStoryEditingComplete: (Uint8List bytes) async {},
       ),
     ));
 
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           home: StoryEditor.memory(
         fakeMemoryImage,
-        onImageEditingComplete: (Uint8List bytes) async {},
+        onStoryEditingComplete: (Uint8List bytes) async {},
       )));
 
       final openBtn = find.byKey(const ValueKey('open-painting-editor-btn'));
@@ -45,7 +45,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           home: StoryEditor.memory(
         fakeMemoryImage,
-        onImageEditingComplete: (Uint8List bytes) async {},
+        onStoryEditingComplete: (Uint8List bytes) async {},
       )));
 
       final openBtn = find.byKey(const ValueKey('open-text-editor-btn'));
@@ -61,7 +61,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           home: StoryEditor.memory(
         fakeMemoryImage,
-        onImageEditingComplete: (Uint8List bytes) async {},
+        onStoryEditingComplete: (Uint8List bytes) async {},
       )));
 
       final openBtn = find.byKey(const ValueKey('open-crop-rotate-editor-btn'));
@@ -76,7 +76,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           home: StoryEditor.memory(
         fakeMemoryImage,
-        onImageEditingComplete: (Uint8List bytes) async {},
+        onStoryEditingComplete: (Uint8List bytes) async {},
       )));
 
       final openBtn = find.byKey(const ValueKey('open-filter-editor-btn'));
@@ -91,7 +91,7 @@ void main() {
       await tester.pumpWidget(MaterialApp(
           home: StoryEditor.memory(
         fakeMemoryImage,
-        onImageEditingComplete: (Uint8List bytes) async {},
+        onStoryEditingComplete: (Uint8List bytes) async {},
       )));
 
       final openBtn = find.byKey(const ValueKey('open-emoji-editor-btn'));
@@ -111,7 +111,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: StoryEditor.memory(
       fakeMemoryImage,
-      onImageEditingComplete: (Uint8List bytes) async {},
+      onStoryEditingComplete: (Uint8List bytes) async {},
     )));
 
     // Open text editor
@@ -168,7 +168,7 @@ void main() {
           home: StoryEditor.memory(
         fakeMemoryImage,
         allowCompleteWithEmptyEditing: givingAllowCompleteWithEmptyEditing,
-        onImageEditingComplete: (Uint8List bytes) async {
+        onStoryEditingComplete: (Uint8List bytes) async {
           hasCompleteEdit = true;
         },
       )));

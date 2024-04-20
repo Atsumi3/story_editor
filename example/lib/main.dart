@@ -77,7 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       designMode: ImageEditorDesignModeE.material,
                       i18n: const I18n(),
                     );
-                  var url = 'https://picsum.photos/2000';
+
+                  final screenSize = MediaQuery.of(context).size;
+                  var url =
+                      'https://picsum.photos/${screenSize.width.toInt()}/${screenSize.height.toInt()}';
                   var bytes = await fetchImageAsUint8List(url);
                   if (context.mounted) await loading.hide(context);
                   if (context.mounted) {
