@@ -369,8 +369,32 @@ class StickerLayerData extends Layer {
   Map toStickerMap(int listPosition) {
     return {
       ...toMap(),
+      // TODO: sticker idをセットする
       'listPosition': listPosition,
       'type': 'sticker',
+    };
+  }
+}
+
+class EffectLayerData extends Layer {
+  Widget effect;
+
+  EffectLayerData({
+    required this.effect,
+    super.offset,
+    super.rotation,
+    super.scale,
+    super.id,
+    super.flipX,
+    super.flipY,
+  });
+
+  Map toStickerMap(int listPosition) {
+    return {
+      ...toMap(),
+      'listPosition': listPosition,
+      'effect': effect,
+      'type': 'effect',
     };
   }
 }

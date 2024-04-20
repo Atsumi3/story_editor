@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:story_editor/models/import_export/utils/export_import_enum.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:story_editor/models/import_export/utils/export_import_enum.dart';
 
 import '../editor_image.dart';
 import '../history/state_history.dart';
@@ -48,6 +48,7 @@ class ExportStateHistory {
     List history = [];
     List cropRotateImages = [];
     List<Uint8List> stickers = [];
+    List<Uint8List> effects = [];
     List<EditorStateHistory> changes = List.from(stateHistory);
 
     if (changes.isNotEmpty) changes.removeAt(0);
@@ -77,6 +78,7 @@ class ExportStateHistory {
         element: element,
         layers: layers,
         stickers: stickers,
+        effects: effects,
       );
 
       if (_configs.exportFilter) {
@@ -113,6 +115,7 @@ class ExportStateHistory {
           : _editorPosition - 1,
       if (history.isNotEmpty) 'history': history,
       if (stickers.isNotEmpty) 'stickers': stickers,
+      if (effects.isNotEmpty) 'effects': effects,
       if (cropRotateImages.isNotEmpty) 'cropRotateImages': cropRotateImages,
       'imgSize': {
         'width': _imgSize.width,
@@ -157,6 +160,7 @@ class ExportStateHistory {
     required EditorStateHistory element,
     required List layers,
     required List stickers,
+    required List effects,
   }) async {
     for (var layer in element.layers) {
       if ((_configs.exportPainting && layer.runtimeType == PaintingLayerData) ||
@@ -168,6 +172,11 @@ class ExportStateHistory {
         layers.add((layer as StickerLayerData).toStickerMap(stickers.length));
         stickers
             .add(await _screenshotController.captureFromWidget(layer.sticker));
+      } else if (_configs.exportEffect &&
+          layer.runtimeType == EffectLayerData) {
+        layers.add((layer as EffectLayerData).toStickerMap(effects.length));
+        effects
+            .add(await _screenshotController.captureFromWidget(layer.effect));
       }
     }
   }

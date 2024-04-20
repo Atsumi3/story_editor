@@ -6,7 +6,8 @@ import 'dart:math';
 import 'package:flutter/foundation.dart' hide Category;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:story_editor/models/editor_configs/effect_editor_configs.dart';
 import 'package:story_editor/story_editor.dart';
 import 'package:story_editor/widgets/loading_dialog.dart';
 
@@ -145,74 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 backgroundMode: 'Background mode',
                                 smallScreenMoreTooltip: 'More',
                               ),
-                              // cropRotateEditor: I18nCropRotateEditor(
-                              //   bottomNavigationBarText: 'Crop/ Rotate',
-                              //   rotate: 'Rotate',
-                              //   ratio: 'Ratio',
-                              //   back: 'Back',
-                              //   done: 'Done',
-                              //   prepareImageDialogMsg: 'Please wait',
-                              //   applyChangesDialogMsg: 'Please wait',
-                              //   smallScreenMoreTooltip: 'More',
-                              // ),
-                              // filterEditor: I18nFilterEditor(
-                              //   applyFilterDialogMsg:
-                              //       'Filter is being applied.',
-                              //   bottomNavigationBarText: 'Filter',
-                              //   back: 'Back',
-                              //   done: 'Done',
-                              //   filters: I18nFilters(
-                              //     none: 'No Filter',
-                              //     addictiveBlue: 'AddictiveBlue',
-                              //     addictiveRed: 'AddictiveRed',
-                              //     aden: 'Aden',
-                              //     amaro: 'Amaro',
-                              //     ashby: 'Ashby',
-                              //     brannan: 'Brannan',
-                              //     brooklyn: 'Brooklyn',
-                              //     charmes: 'Charmes',
-                              //     clarendon: 'Clarendon',
-                              //     crema: 'Crema',
-                              //     dogpatch: 'Dogpatch',
-                              //     earlybird: 'Earlybird',
-                              //     f1977: '1977',
-                              //     gingham: 'Gingham',
-                              //     ginza: 'Ginza',
-                              //     hefe: 'Hefe',
-                              //     helena: 'Helena',
-                              //     hudson: 'Hudson',
-                              //     inkwell: 'Inkwell',
-                              //     juno: 'Juno',
-                              //     kelvin: 'Kelvin',
-                              //     lark: 'Lark',
-                              //     loFi: 'Lo-Fi',
-                              //     ludwig: 'Ludwig',
-                              //     maven: 'Maven',
-                              //     mayfair: 'Mayfair',
-                              //     moon: 'Moon',
-                              //     nashville: 'Nashville',
-                              //     perpetua: 'Perpetua',
-                              //     reyes: 'Reyes',
-                              //     rise: 'Rise',
-                              //     sierra: 'Sierra',
-                              //     skyline: 'Skyline',
-                              //     slumber: 'Slumber',
-                              //     stinson: 'Stinson',
-                              //     sutro: 'Sutro',
-                              //     toaster: 'Toaster',
-                              //     valencia: 'Valencia',
-                              //     vesper: 'Vesper',
-                              //     walden: 'Walden',
-                              //     willow: 'Willow',
-                              //     xProII: 'Pro II',
-                              //   ),
-                              // ),
-                              // blurEditor: I18nBlurEditor(
-                              //   applyBlurDialogMsg: 'Blur is being applied.',
-                              //   bottomNavigationBarText: 'Blur',
-                              //   back: 'Back',
-                              //   done: 'Done',
-                              // ),
                               emojiEditor: I18nEmojiEditor(
                                 bottomNavigationBarText: 'Emoji',
                               ),
@@ -232,7 +165,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               showRotateLine: true,
                               hitVibration: true,
                             ),
-                            // customWidgets: const ImageEditorCustomWidgets(),
+                            // customWidgets: const ImageEditorCustomWidgets(
+                            //   bottomNavigationBar: Icon(Icons.layers_outlined),
+                            // ),
                             imageEditorTheme: const ImageEditorTheme(
                               layerHoverCursor: SystemMouseCursors.move,
                               helperLine: HelperLineTheme(
@@ -479,6 +414,32 @@ class _MyHomePageState extends State<MyHomePage> {
                                 );
                               },
                             ),
+                            effectEditorConfigs: EffectEditorConfigs(
+                                enabled: true,
+                                builder: (setLayer) {
+                                  return ListView.builder(
+                                    itemCount: 10,
+                                    itemBuilder: (context, index) {
+                                      final widget = ClipRRect(
+                                        borderRadius: BorderRadius.circular(7),
+                                        child: Lottie.network(
+                                          'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json',
+                                          width: 120,
+                                          height: 120,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      );
+
+                                      return GestureDetector(
+                                        onTap: () => setLayer(widget),
+                                        child: MouseRegion(
+                                          cursor: SystemMouseCursors.click,
+                                          child: widget,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }),
                             designMode: ImageEditorDesignModeE.material,
                             heroTag: 'hero',
                             theme: ThemeData(
@@ -495,245 +456,245 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 },
               ),
-              // WhatApp Theme
-              OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => StoryEditor.network(
-                        'https://picsum.photos/id/350/1500/3000',
-                        onStoryEditingComplete: (bytes) async {
-                          Navigator.pop(context);
-                        },
-                        configs: StoryEditorConfigs(
-                          textEditorConfigs: TextEditorConfigs(
-                            whatsAppCustomTextStyles: [
-                              GoogleFonts.roboto(),
-                              GoogleFonts.averiaLibre(),
-                              GoogleFonts.lato(),
-                              GoogleFonts.comicNeue(),
-                              GoogleFonts.actor(),
-                              GoogleFonts.odorMeanChey(),
-                              GoogleFonts.nabla(),
-                            ],
-                          ),
-                          imageEditorTheme: const ImageEditorTheme(
-                            helperLine: HelperLineTheme(
-                              horizontalColor:
-                                  Color.fromARGB(255, 129, 218, 88),
-                              verticalColor: Color.fromARGB(255, 129, 218, 88),
-                            ),
-                          ),
-                          paintEditorConfigs: const PaintEditorConfigs(
-                            initialStrokeWidth: 5,
-                          ),
-                          filterEditorConfigs: FilterEditorConfigs(
-                            whatsAppFilterTextOffsetY: 90,
-                            filterList: [
-                              ColorFilterGenerator(
-                                name: "None",
-                                filters: [],
-                              ),
-                              ColorFilterGenerator(
-                                name: "Pop",
-                                filters: [
-                                  ColorFilterAddons.colorOverlay(
-                                      255, 225, 80, 0.08),
-                                  ColorFilterAddons.saturation(0.1),
-                                  ColorFilterAddons.contrast(0.05),
-                                ],
-                              ),
-                              ColorFilterGenerator(
-                                name: "B&W",
-                                filters: [
-                                  ColorFilterAddons.grayscale(),
-                                  ColorFilterAddons.colorOverlay(
-                                      100, 28, 210, 0.03),
-                                  ColorFilterAddons.brightness(0.1),
-                                ],
-                              ),
-                              ColorFilterGenerator(
-                                name: "Cool",
-                                filters: [
-                                  ColorFilterAddons.addictiveColor(0, 0, 20),
-                                ],
-                              ),
-                              ColorFilterGenerator(
-                                name: "Chrome",
-                                filters: [
-                                  ColorFilterAddons.contrast(0.15),
-                                  ColorFilterAddons.saturation(0.2),
-                                ],
-                              ),
-                              ColorFilterGenerator(
-                                name: "Film",
-                                filters: [
-                                  ColorFilterAddons.brightness(.05),
-                                  ColorFilterAddons.saturation(-0.03),
-                                ],
-                              ),
-                            ],
-                          ),
-                          stickerEditorConfigs: StickerEditorConfigs(
-                            enabled: true,
-                            onSearchChanged: (value) {
-                              /// Filter your stickers
-                              debugPrint(value);
-                            },
-                            buildStickers: (setLayer) {
-                              List<String> demoTitels = [
-                                'Recent',
-                                'Favorites',
-                                'Shapes',
-                                'Funny',
-                                'Boring',
-                                'Frog',
-                                'Snow',
-                                'More'
-                              ];
-                              List<Widget> slivers = [];
-                              int offset = 0;
-                              for (var element in demoTitels) {
-                                slivers.addAll([
-                                  _buildDemoStickersTitle(element),
-                                  _buildDemoStickers(offset, setLayer),
-                                  const SliverToBoxAdapter(
-                                      child: SizedBox(height: 20)),
-                                ]);
-                                offset += 20;
-                              }
+              // // WhatApp Theme
+              // OutlinedButton.icon(
+              //   onPressed: () {
+              //     Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => StoryEditor.network(
+              //           'https://picsum.photos/id/350/1500/3000',
+              //           onStoryEditingComplete: (bytes) async {
+              //             Navigator.pop(context);
+              //           },
+              //           configs: StoryEditorConfigs(
+              //             textEditorConfigs: TextEditorConfigs(
+              //               whatsAppCustomTextStyles: [
+              //                 GoogleFonts.roboto(),
+              //                 GoogleFonts.averiaLibre(),
+              //                 GoogleFonts.lato(),
+              //                 GoogleFonts.comicNeue(),
+              //                 GoogleFonts.actor(),
+              //                 GoogleFonts.odorMeanChey(),
+              //                 GoogleFonts.nabla(),
+              //               ],
+              //             ),
+              //             imageEditorTheme: const ImageEditorTheme(
+              //               helperLine: HelperLineTheme(
+              //                 horizontalColor:
+              //                     Color.fromARGB(255, 129, 218, 88),
+              //                 verticalColor: Color.fromARGB(255, 129, 218, 88),
+              //               ),
+              //             ),
+              //             paintEditorConfigs: const PaintEditorConfigs(
+              //               initialStrokeWidth: 5,
+              //             ),
+              //             filterEditorConfigs: FilterEditorConfigs(
+              //               whatsAppFilterTextOffsetY: 90,
+              //               filterList: [
+              //                 ColorFilterGenerator(
+              //                   name: "None",
+              //                   filters: [],
+              //                 ),
+              //                 ColorFilterGenerator(
+              //                   name: "Pop",
+              //                   filters: [
+              //                     ColorFilterAddons.colorOverlay(
+              //                         255, 225, 80, 0.08),
+              //                     ColorFilterAddons.saturation(0.1),
+              //                     ColorFilterAddons.contrast(0.05),
+              //                   ],
+              //                 ),
+              //                 ColorFilterGenerator(
+              //                   name: "B&W",
+              //                   filters: [
+              //                     ColorFilterAddons.grayscale(),
+              //                     ColorFilterAddons.colorOverlay(
+              //                         100, 28, 210, 0.03),
+              //                     ColorFilterAddons.brightness(0.1),
+              //                   ],
+              //                 ),
+              //                 ColorFilterGenerator(
+              //                   name: "Cool",
+              //                   filters: [
+              //                     ColorFilterAddons.addictiveColor(0, 0, 20),
+              //                   ],
+              //                 ),
+              //                 ColorFilterGenerator(
+              //                   name: "Chrome",
+              //                   filters: [
+              //                     ColorFilterAddons.contrast(0.15),
+              //                     ColorFilterAddons.saturation(0.2),
+              //                   ],
+              //                 ),
+              //                 ColorFilterGenerator(
+              //                   name: "Film",
+              //                   filters: [
+              //                     ColorFilterAddons.brightness(.05),
+              //                     ColorFilterAddons.saturation(-0.03),
+              //                   ],
+              //                 ),
+              //               ],
+              //             ),
+              //             stickerEditorConfigs: StickerEditorConfigs(
+              //               enabled: true,
+              //               onSearchChanged: (value) {
+              //                 /// Filter your stickers
+              //                 debugPrint(value);
+              //               },
+              //               buildStickers: (setLayer) {
+              //                 List<String> demoTitels = [
+              //                   'Recent',
+              //                   'Favorites',
+              //                   'Shapes',
+              //                   'Funny',
+              //                   'Boring',
+              //                   'Frog',
+              //                   'Snow',
+              //                   'More'
+              //                 ];
+              //                 List<Widget> slivers = [];
+              //                 int offset = 0;
+              //                 for (var element in demoTitels) {
+              //                   slivers.addAll([
+              //                     _buildDemoStickersTitle(element),
+              //                     _buildDemoStickers(offset, setLayer),
+              //                     const SliverToBoxAdapter(
+              //                         child: SizedBox(height: 20)),
+              //                   ]);
+              //                   offset += 20;
+              //                 }
 
-                              return Column(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          8.0, 8.0, 8.0, 0),
-                                      child: CustomScrollView(
-                                        slivers: slivers,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 50,
-                                    color: Colors.grey.shade800,
-                                    child: Row(
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(
-                                              Icons.watch_later_outlined),
-                                          color: Colors.white,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.mood),
-                                          color: Colors.white,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.pets),
-                                          color: Colors.white,
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.coronavirus),
-                                          color: Colors.white,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                          customWidgets: ImageEditorCustomWidgets(
-                            whatsAppBottomWidget: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        16, 7, 16, 12),
-                                    child: TextField(
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        isDense: true,
-                                        prefixIcon: const Padding(
-                                          padding: EdgeInsets.only(left: 7.0),
-                                          child: Icon(
-                                            Icons.add_photo_alternate_rounded,
-                                            size: 24,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        hintText: 'Add a caption...',
-                                        hintStyle: const TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 238, 238, 238),
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          borderSide: BorderSide.none,
-                                        ),
-                                        fillColor: const Color(0xFF202D35),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: Container(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        16, 7, 16, 12),
-                                    color: Colors.black38,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 4,
-                                            horizontal: 10,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: const Color(0xFF202D35),
-                                          ),
-                                          child: const Text(
-                                            'Alex Frei',
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.send),
-                                          style: IconButton.styleFrom(
-                                            backgroundColor:
-                                                const Color(0xFF0DA886),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.chat_outlined),
-                label: const Text('WhatsApp Theme'),
-              ),
+              //                 return Column(
+              //                   children: [
+              //                     Expanded(
+              //                       child: Padding(
+              //                         padding: const EdgeInsets.fromLTRB(
+              //                             8.0, 8.0, 8.0, 0),
+              //                         child: CustomScrollView(
+              //                           slivers: slivers,
+              //                         ),
+              //                       ),
+              //                     ),
+              //                     Container(
+              //                       height: 50,
+              //                       color: Colors.grey.shade800,
+              //                       child: Row(
+              //                         children: [
+              //                           IconButton(
+              //                             onPressed: () {},
+              //                             icon: const Icon(
+              //                                 Icons.watch_later_outlined),
+              //                             color: Colors.white,
+              //                           ),
+              //                           IconButton(
+              //                             onPressed: () {},
+              //                             icon: const Icon(Icons.mood),
+              //                             color: Colors.white,
+              //                           ),
+              //                           IconButton(
+              //                             onPressed: () {},
+              //                             icon: const Icon(Icons.pets),
+              //                             color: Colors.white,
+              //                           ),
+              //                           IconButton(
+              //                             onPressed: () {},
+              //                             icon: const Icon(Icons.coronavirus),
+              //                             color: Colors.white,
+              //                           ),
+              //                         ],
+              //                       ),
+              //                     ),
+              //                   ],
+              //                 );
+              //               },
+              //             ),
+              //             customWidgets: ImageEditorCustomWidgets(
+              //               whatsAppBottomWidget: Column(
+              //                 mainAxisSize: MainAxisSize.min,
+              //                 children: [
+              //                   Flexible(
+              //                     child: Padding(
+              //                       padding: const EdgeInsets.fromLTRB(
+              //                           16, 7, 16, 12),
+              //                       child: TextField(
+              //                         textAlignVertical:
+              //                             TextAlignVertical.center,
+              //                         decoration: InputDecoration(
+              //                           filled: true,
+              //                           isDense: true,
+              //                           prefixIcon: const Padding(
+              //                             padding: EdgeInsets.only(left: 7.0),
+              //                             child: Icon(
+              //                               Icons.add_photo_alternate_rounded,
+              //                               size: 24,
+              //                               color: Colors.white,
+              //                             ),
+              //                           ),
+              //                           hintText: 'Add a caption...',
+              //                           hintStyle: const TextStyle(
+              //                             color: Color.fromARGB(
+              //                                 255, 238, 238, 238),
+              //                             fontWeight: FontWeight.w400,
+              //                           ),
+              //                           border: OutlineInputBorder(
+              //                             borderRadius:
+              //                                 BorderRadius.circular(40),
+              //                             borderSide: BorderSide.none,
+              //                           ),
+              //                           fillColor: const Color(0xFF202D35),
+              //                         ),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                   Flexible(
+              //                     child: Container(
+              //                       padding: const EdgeInsets.fromLTRB(
+              //                           16, 7, 16, 12),
+              //                       color: Colors.black38,
+              //                       child: Row(
+              //                         mainAxisAlignment:
+              //                             MainAxisAlignment.spaceBetween,
+              //                         children: [
+              //                           Container(
+              //                             padding: const EdgeInsets.symmetric(
+              //                               vertical: 4,
+              //                               horizontal: 10,
+              //                             ),
+              //                             decoration: BoxDecoration(
+              //                               borderRadius:
+              //                                   BorderRadius.circular(20),
+              //                               color: const Color(0xFF202D35),
+              //                             ),
+              //                             child: const Text(
+              //                               'Alex Frei',
+              //                               style: TextStyle(
+              //                                 fontSize: 13,
+              //                               ),
+              //                             ),
+              //                           ),
+              //                           IconButton(
+              //                             onPressed: () {},
+              //                             icon: const Icon(Icons.send),
+              //                             style: IconButton.styleFrom(
+              //                               backgroundColor:
+              //                                   const Color(0xFF0DA886),
+              //                             ),
+              //                           )
+              //                         ],
+              //                       ),
+              //                     ),
+              //                   )
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     );
+              //   },
+              //   icon: const Icon(Icons.chat_outlined),
+              //   label: const Text('WhatsApp Theme'),
+              // ),
             ],
           ),
         ),

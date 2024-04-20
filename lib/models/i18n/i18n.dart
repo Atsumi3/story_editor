@@ -1,20 +1,22 @@
+import 'package:story_editor/models/i18n/i18n_effect_editor.dart';
+
+import 'i18n_blur_editor.dart';
 import 'i18n_crop_rotate_editor.dart';
 import 'i18n_emoji_editor.dart';
 import 'i18n_filter_editor.dart';
-import 'i18n_blur_editor.dart';
 import 'i18n_painting_editor.dart';
 import 'i18n_sticker_editor.dart';
 import 'i18n_text_editor.dart';
 import 'i18n_various.dart';
 
-export 'i18n_various.dart';
-export 'i18n_text_editor.dart';
-export 'i18n_painting_editor.dart';
-export 'i18n_filter_editor.dart';
 export 'i18n_blur_editor.dart';
-export 'i18n_emoji_editor.dart';
-export 'i18n_sticker_editor.dart';
 export 'i18n_crop_rotate_editor.dart';
+export 'i18n_emoji_editor.dart';
+export 'i18n_filter_editor.dart';
+export 'i18n_painting_editor.dart';
+export 'i18n_sticker_editor.dart';
+export 'i18n_text_editor.dart';
+export 'i18n_various.dart';
 
 /// The `I18n` class provides internationalization settings for the image editor
 /// and its components. It includes translations and messages for various parts
@@ -121,6 +123,8 @@ class I18n {
   /// Translations and messages specific to the sticker editor.
   final I18nStickerEditor stickerEditor;
 
+  final I18nEffectEditor effectEditor;
+
   /// Translations and messages specific to the crop and rotate editor.
   final I18nCropRotateEditor cropRotateEditor;
 
@@ -184,6 +188,7 @@ class I18n {
     this.blurEditor = const I18nBlurEditor(),
     this.emojiEditor = const I18nEmojiEditor(),
     this.stickerEditor = const I18nStickerEditor(),
+    this.effectEditor = const I18nEffectEditor(),
     this.various = const I18nVarious(),
     this.cancel = 'Cancel',
     this.undo = 'Undo',

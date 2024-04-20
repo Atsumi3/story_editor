@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:story_editor/models/icons/icons_effect_editor.dart';
 
+import 'icons_blur_editor.dart';
 import 'icons_crop_rotate_editor.dart';
 import 'icons_emoji_editor.dart';
 import 'icons_filter_editor.dart';
-import 'icons_blur_editor.dart';
 import 'icons_painting_editor.dart';
 import 'icons_sticker_editor.dart';
 import 'icons_text_editor.dart';
 
+export 'icons_blur_editor.dart';
 export 'icons_crop_rotate_editor.dart';
 export 'icons_emoji_editor.dart';
-export 'icons_sticker_editor.dart';
 export 'icons_filter_editor.dart';
-export 'icons_blur_editor.dart';
 export 'icons_painting_editor.dart';
+export 'icons_sticker_editor.dart';
 export 'icons_text_editor.dart';
 
 /// Customizable icons for the Image Editor component.
@@ -59,6 +60,8 @@ class ImageEditorIcons {
 
   /// Icons for the Sticker Editor component.
   final IconsStickerEditor stickerEditor;
+
+  final IconsEffectEditor effectEditor;
 
   /// Creates an instance of [ImageEditorIcons] with customizable icon settings.
   ///
@@ -132,6 +135,7 @@ class ImageEditorIcons {
     this.blurEditor = const IconsBlurEditor(),
     this.emojiEditor = const IconsEmojiEditor(),
     this.stickerEditor = const IconsStickerEditor(),
+    this.effectEditor = const IconsEffectEditor(),
     this.closeEditor = Icons.clear,
     this.doneIcon = Icons.done,
     this.applyChanges = Icons.done,

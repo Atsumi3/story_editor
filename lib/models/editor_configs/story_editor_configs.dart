@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:story_editor/models/editor_configs/effect_editor_configs.dart';
 import 'package:story_editor/models/editor_configs/sticker_editor_configs.dart';
 import 'package:story_editor/models/import_export/import_state_history.dart';
 
@@ -59,6 +60,8 @@ class StoryEditorConfigs {
   /// Configuration options for the Sticker Editor.
   final StickerEditorConfigs? stickerEditorConfigs;
 
+  final EffectEditorConfigs? effectEditorConfigs;
+
   /// The design mode for the Image Editor.
   final ImageEditorDesignModeE designMode;
 
@@ -97,6 +100,7 @@ class StoryEditorConfigs {
     this.blurEditorConfigs = const BlurEditorConfigs(),
     this.emojiEditorConfigs = const EmojiEditorConfigs(),
     this.stickerEditorConfigs,
+    this.effectEditorConfigs,
     this.designMode = ImageEditorDesignModeE.material,
     this.initStateHistory,
   });

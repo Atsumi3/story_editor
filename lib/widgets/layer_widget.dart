@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:story_editor/utils/theme_functions.dart';
 import 'package:rounded_background_text/rounded_background_text.dart';
+import 'package:story_editor/utils/theme_functions.dart';
 
 import '../models/i18n/i18n.dart';
 import '../models/layer.dart';
@@ -69,23 +69,24 @@ class LayerWidget extends StatefulWidget {
   final bool enabledHitDetection;
 
   /// Creates a [LayerWidget] with the specified properties.
-  const LayerWidget(
-      {super.key,
-      required this.padding,
-      required this.layerData,
-      required this.onTapDown,
-      required this.onTapUp,
-      required this.onTap,
-      required this.layerHoverCursor,
-      required this.onRemoveTap,
-      required this.i18n,
-      required this.textFontSize,
-      required this.stickerInitWidth,
-      required this.emojiTextStyle,
-      required this.enabledHitDetection,
-      required this.freeStyleHighPerformanceScaling,
-      required this.freeStyleHighPerformanceMoving,
-      required this.designMode});
+  const LayerWidget({
+    super.key,
+    required this.padding,
+    required this.layerData,
+    required this.onTapDown,
+    required this.onTapUp,
+    required this.onTap,
+    required this.layerHoverCursor,
+    required this.onRemoveTap,
+    required this.i18n,
+    required this.textFontSize,
+    required this.stickerInitWidth,
+    required this.emojiTextStyle,
+    required this.enabledHitDetection,
+    required this.freeStyleHighPerformanceScaling,
+    required this.freeStyleHighPerformanceMoving,
+    required this.designMode,
+  });
 
   @override
   createState() => _LayerWidgetState();
@@ -112,6 +113,9 @@ class _LayerWidgetState extends State<LayerWidget> {
         break;
       case const (PaintingLayerData):
         _layerType = _LayerType.canvas;
+        break;
+      case const (EffectLayerData):
+        _layerType = _LayerType.effect;
         break;
       default:
         _layerType = _LayerType.unknown;
@@ -263,6 +267,8 @@ class _LayerWidgetState extends State<LayerWidget> {
         return _buildText();
       case _LayerType.sticker:
         return _buildSticker();
+      case _LayerType.effect:
+        return _buildEffect();
       case _LayerType.canvas:
         return _buildCanvas();
       default:
@@ -346,6 +352,17 @@ class _LayerWidgetState extends State<LayerWidget> {
     );
   }
 
+  Widget _buildEffect() {
+    var layer = _layer as EffectLayerData;
+    return SizedBox(
+      width: 120 * layer.scale,
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: layer.effect,
+      ),
+    );
+  }
+
   /// Build the canvas widget
   Widget _buildCanvas() {
     var layer = _layer as PaintingLayerData;
@@ -370,7 +387,7 @@ class _LayerWidgetState extends State<LayerWidget> {
 }
 
 // ignore: camel_case_types
-enum _LayerType { emoji, text, sticker, canvas, unknown }
+enum _LayerType { emoji, text, sticker, canvas, effect, unknown }
 
 /// Enumeration for controlling the background color mode of the text layer.
 enum LayerBackgroundColorModeE {
