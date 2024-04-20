@@ -518,7 +518,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                           imageEditorTheme: const ImageEditorTheme(
-                            editorMode: ThemeEditorMode.whatsapp,
                             helperLine: HelperLineTheme(
                               horizontalColor:
                                   Color.fromARGB(255, 129, 218, 88),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/story_editor_icons.dart';
-
 /// Customizable icons for the Sticker Editor component.
 class IconsStickerEditor {
   /// The icon to be displayed in the bottom navigation bar.
@@ -21,6 +19,6 @@ class IconsStickerEditor {
   /// )
   /// ```
   const IconsStickerEditor({
-    this.bottomNavBar = StoryEditorIcons.stickers,
+    this.bottomNavBar = Icons.layers_outlined,
   });
 }

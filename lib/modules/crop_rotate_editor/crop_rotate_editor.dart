@@ -5,7 +5,6 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/services.dart';
-import 'package:story_editor/designs/whatsapp/whatsapp_crop_rotate_toolbar.dart';
 import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 import 'package:story_editor/models/theme/theme.dart';
 
@@ -561,7 +560,6 @@ class CropRotateEditorState extends State<CropRotateEditor> {
                 children: _buildBody(),
               ),
             ),
-            bottomNavigationBar: _buildBottomNavigationBar(),
           ),
         ),
       );
@@ -655,21 +653,6 @@ class CropRotateEditorState extends State<CropRotateEditor> {
                 ],
               )
             : null);
-  }
-
-  Widget? _buildBottomNavigationBar() {
-    if (widget.configs.imageEditorTheme.editorMode ==
-        ThemeEditorMode.whatsapp) {
-      return WhatsAppCropRotateToolbar(
-        configs: widget.configs,
-        onCancel: close,
-        onRotate: rotate,
-        onDone: done,
-        onReset: reset,
-        openAspectRatios: openAspectRatioOptions,
-      );
-    }
-    return null;
   }
 
   /// Builds and returns an IconButton for applying changes.

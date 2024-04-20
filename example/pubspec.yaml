@@ -17,6 +17,7 @@ dependencies:
   file_picker: ^8.0.0+1
   google_fonts: ^6.2.0
   flutter_hooks: ^0.20.5
+  flutter_riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/story_editor_icons.dart';
-
 /// Customizable icons for the Painting Editor component.
 class IconsPaintingEditor {
   /// The icon to be displayed in the bottom navigation bar.
@@ -33,15 +31,6 @@ class IconsPaintingEditor {
 
   /// The icon for the dashed line drawing tool.
   final IconData dashLine;
-
-  /// The icon for the thin stroke width when the theme is set to `Whatsapp`.
-  final IconData whatsAppStrokeWidthThin;
-
-  /// The icon for the medium stroke width when the theme is set to `Whatsapp`.
-  final IconData whatsAppStrokeWidthMedium;
-
-  /// The icon for the bold stroke width when the theme is set to `Whatsapp`.
-  final IconData whatsAppStrokeWidthBold;
 
   /// Creates an instance of [IconsPaintingEditor] with customizable icon settings.
   ///
@@ -87,8 +76,5 @@ class IconsPaintingEditor {
     this.rectangle = Icons.crop_free,
     this.circle = Icons.lens_outlined,
     this.dashLine = Icons.power_input,
-    this.whatsAppStrokeWidthThin = StoryEditorIcons.penSize1,
-    this.whatsAppStrokeWidthMedium = StoryEditorIcons.penSize2,
-    this.whatsAppStrokeWidthBold = StoryEditorIcons.penSize3,
   });
 }

@@ -2,22 +2,17 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:colorfilter_generator/presets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:story_editor/designs/whatsapp/whatsapp_appbar.dart';
 import 'package:story_editor/models/import_export/utils/export_import_enum.dart';
 import 'package:story_editor/models/theme/theme_editor_mode.dart';
 import 'package:story_editor/modules/sticker_editor.dart';
-import 'package:story_editor/utils/design_mode.dart';
 import 'package:story_editor/utils/swipe_mode.dart';
 import 'package:vibration/vibration.dart';
 
-import 'designs/whatsapp/whatsapp_filter_button.dart';
-import 'designs/whatsapp/whatsapp_sticker_editor.dart';
 import 'models/blur_state_history.dart';
 import 'models/crop_rotate_editor_response.dart';
 import 'models/editor_configs/story_editor_configs.dart';
@@ -33,7 +28,6 @@ import 'modules/blur_editor.dart';
 import 'modules/crop_rotate_editor/crop_rotate_editor.dart';
 import 'modules/emoji_editor/emoji_editor.dart';
 import 'modules/filter_editor/filter_editor.dart';
-import 'modules/filter_editor/widgets/filter_editor_item_list.dart';
 import 'modules/filter_editor/widgets/image_with_multiple_filters.dart';
 import 'modules/paint_editor/paint_editor.dart';
 import 'modules/text_editor.dart';
@@ -478,9 +472,6 @@ class StoryEditorState extends State<StoryEditor> {
   /// Whether a dialog is currently open.
   bool _openDialog = false;
 
-  /// Represents the helper value for showing WhatsApp filters.
-  double _whatsAppFilterShowHelper = 0;
-
   /// Represents the direction of swipe action.
   SwipeMode _swipeDirection = SwipeMode.none;
 
@@ -920,24 +911,8 @@ class StoryEditorState extends State<StoryEditor> {
   /// This method is called during a scaling operation and updates the selected layer's position and properties.
   void _onScaleUpdate(ScaleUpdateDetails detail) {
     if (_selectedLayer < 0) {
-      if (widget.configs.imageEditorTheme.editorMode ==
-          ThemeEditorMode.whatsapp) {
-        _whatsAppFilterShowHelper -= detail.focalPointDelta.dy;
-        _whatsAppFilterShowHelper = max(0, min(120, _whatsAppFilterShowHelper));
-
-        double pointerOffset = _snapStartPosY - detail.focalPoint.dy;
-        if (pointerOffset > 20) {
-          _swipeDirection = SwipeMode.up;
-        } else if (pointerOffset < -20) {
-          _swipeDirection = SwipeMode.down;
-        }
-
-        setState(() {});
-      }
       return;
     }
-
-    if (_whatsAppFilterShowHelper > 0) return;
 
     _enabledHitDetection = false;
     if (detail.pointerCount == 1) {
@@ -1069,30 +1044,6 @@ class StoryEditorState extends State<StoryEditor> {
   ///
   /// This method is called when a scaling operation ends and resets helper lines and flags.
   void _onScaleEnd(ScaleEndDetails detail) async {
-    if (_selectedLayer < 0 &&
-        widget.configs.imageEditorTheme.editorMode ==
-            ThemeEditorMode.whatsapp) {
-      _showHelperLines = false;
-
-      if (_swipeDirection != SwipeMode.none &&
-          DateTime.now().difference(_swipeStartTime).inMilliseconds < 200) {
-        if (_swipeDirection == SwipeMode.up) {
-          _whatsAppFilterSheetAutoAnimation(true);
-        } else if (_swipeDirection == SwipeMode.down) {
-          _whatsAppFilterSheetAutoAnimation(false);
-        }
-      } else {
-        if (_whatsAppFilterShowHelper < 90) {
-          _whatsAppFilterSheetAutoAnimation(false);
-        } else {
-          _whatsAppFilterSheetAutoAnimation(true);
-        }
-      }
-
-      _whatsAppFilterShowHelper = max(0, min(120, _whatsAppFilterShowHelper));
-      setState(() {});
-    }
-
     if (!hoverRemoveBtn && _tempLayer != null) _updateTempLayer();
 
     _enabledHitDetection = true;
@@ -1562,73 +1513,6 @@ class StoryEditorState extends State<StoryEditor> {
     widget.onUpdateUI?.call();
   }
 
-  /// Opens the WhatsApp sticker editor.
-  ///
-  /// This method removes the keyboard handler, then depending on the design mode specified in the [configs] parameter of the widget, it either opens the WhatsAppStickerPage directly or shows it as a modal bottom sheet.
-  ///
-  /// If the design mode is set to [ImageEditorDesignModeE.material], the WhatsAppStickerPage is opened directly using [_openPage()]. Otherwise, it is displayed as a modal bottom sheet with specific configurations such as transparent background, black barrier color, and controlled scrolling.
-  ///
-  /// After the page is opened and a layer is returned, the keyboard handler is added back. If no layer is returned or the widget is not mounted, the method returns early.
-  ///
-  /// If the returned layer's runtime type is not StickerLayerData, the layer's scale is set to the initial scale specified in [emojiEditorConfigs] of the [configs] parameter. Regardless, the layer's offset is set to the center of the image.
-  ///
-  /// Finally, the layer is added, the UI is updated, and the widget's [onUpdateUI] callback is called if provided.
-  void openWhatsAppStickerEditor() async {
-    setState(() => _openEditor = true);
-    ServicesBinding.instance.keyboard.removeHandler(_onKey);
-
-    Layer? layer;
-    if (widget.configs.designMode == ImageEditorDesignModeE.material) {
-      layer = await _openPage(WhatsAppStickerPage(
-        configs: widget.configs,
-      ));
-    } else {
-      layer = await showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        barrierColor: Colors.black12,
-        showDragHandle: false,
-        isScrollControlled: true,
-        useSafeArea: true,
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 12.0),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-              clipBehavior: Clip.hardEdge,
-              child: WhatsAppStickerPage(
-                configs: widget.configs,
-              ),
-            ),
-          );
-        },
-      );
-    }
-    _openEditor = false;
-
-    ServicesBinding.instance.keyboard.addHandler(_onKey);
-    if (layer == null || !mounted) {
-      setState(() {});
-      return;
-    }
-
-    if (layer.runtimeType != StickerLayerData) {
-      layer.scale = widget.configs.emojiEditorConfigs.initScale;
-    }
-    layer.offset = Offset(
-      _imageWidth / 2,
-      _imageHeight / 2,
-    );
-
-    addLayer(layer);
-
-    setState(() {});
-    widget.onUpdateUI?.call();
-  }
-
   /// Opens the sticker editor as a modal bottom sheet.
   void openStickerEditor() async {
     ServicesBinding.instance.keyboard.removeHandler(_onKey);
@@ -1973,22 +1857,6 @@ class StoryEditorState extends State<StoryEditor> {
     );
   }
 
-  void _whatsAppFilterSheetAutoAnimation(bool up) async {
-    if (up) {
-      while (_whatsAppFilterShowHelper < 120) {
-        _whatsAppFilterShowHelper += 4;
-        setState(() {});
-        await Future.delayed(const Duration(milliseconds: 1));
-      }
-    } else {
-      while (_whatsAppFilterShowHelper > 0) {
-        _whatsAppFilterShowHelper -= 4;
-        setState(() {});
-        await Future.delayed(const Duration(milliseconds: 1));
-      }
-    }
-  }
-
   /// Moves a layer in the list to a new position.
   ///
   /// [oldIndex] is the current index of the layer.
@@ -2134,9 +2002,7 @@ class StoryEditorState extends State<StoryEditor> {
             children: [
               Transform.scale(
                 transformHitTests: false,
-                scale: 1 /
-                    constraints.maxHeight *
-                    (constraints.maxHeight - _whatsAppFilterShowHelper * 2),
+                scale: 1 / constraints.maxHeight * constraints.maxHeight,
                 child: Stack(
                   alignment: Alignment.center,
                   fit: StackFit.expand,
@@ -2200,95 +2066,11 @@ class StoryEditorState extends State<StoryEditor> {
                   ],
                 ),
               ),
-              if (widget.configs.imageEditorTheme.editorMode ==
-                      ThemeEditorMode.whatsapp &&
-                  _selectedLayer < 0)
-                ..._buildWhatsAppWidgets()
             ],
           ),
         ),
       );
     });
-  }
-
-  List<Widget> _buildWhatsAppWidgets() {
-    double opacity = max(0, min(1, 1 - 1 / 120 * _whatsAppFilterShowHelper));
-    return [
-      WhatsAppAppBar(
-        configs: widget.configs,
-        onClose: closeEditor,
-        onTapCropRotateEditor: openCropEditor,
-        onTapStickerEditor: openWhatsAppStickerEditor,
-        onTapPaintEditor: openPaintingEditor,
-        onTapTextEditor: openTextEditor,
-        onTapUndo: undoAction,
-        canUndo: canUndo,
-        openEditor: _openEditor,
-      ),
-      if (widget.configs.designMode == ImageEditorDesignModeE.material)
-        WhatsAppFilterBtn(
-          configs: widget.configs,
-          opacity: opacity,
-        ),
-      if (widget.configs.customWidgets.whatsAppBottomWidget != null)
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Opacity(
-            opacity: opacity,
-            child: widget.configs.customWidgets.whatsAppBottomWidget!,
-          ),
-        ),
-      Positioned(
-        left: 0,
-        right: 0,
-        bottom: -120 + _whatsAppFilterShowHelper,
-        child: Opacity(
-          opacity: max(0, min(1, 1 / 120 * _whatsAppFilterShowHelper)),
-          child: Container(
-            margin: const EdgeInsets.only(top: 7),
-            color: widget
-                .configs.imageEditorTheme.filterEditor.whatsAppBottomBarColor,
-            child: FilterEditorItemList(
-              itemScaleFactor:
-                  max(0, min(1, 1 / 120 * _whatsAppFilterShowHelper)),
-              byteArray: widget.byteArray,
-              file: widget.file,
-              assetPath: widget.assetPath,
-              networkUrl: widget.networkUrl,
-              activeFilters: const [],
-              blur: _blur,
-              configs: widget.configs,
-              selectedFilter: _filters.isNotEmpty
-                  ? _filters.first.filter
-                  : PresetFilters.none,
-              onSelectFilter: (filter) {
-                _cleanForwardChanges();
-
-                stateHistory.add(
-                  EditorStateHistory(
-                    bytesRefIndex: _imgStateHistory.length - 1,
-                    blur: _blur,
-                    layers: activeLayers,
-                    filters: [
-                      FilterStateHistory(
-                        filter: filter,
-                        opacity: 1,
-                      ),
-                    ],
-                  ),
-                );
-                _editPosition++;
-
-                setState(() {});
-                widget.onUpdateUI?.call();
-              },
-            ),
-          ),
-        ),
-      ),
-    ];
   }
 
   Widget? _buildBottomNavBar() {

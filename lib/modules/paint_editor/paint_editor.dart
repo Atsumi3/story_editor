@@ -4,8 +4,6 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:story_editor/designs/whatsapp/whatsapp_painting_appbar.dart';
-import 'package:story_editor/designs/whatsapp/whatsapp_painting_bottombar.dart';
 import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 import 'package:story_editor/models/theme/theme.dart';
 
@@ -624,26 +622,6 @@ class PaintingEditorState extends State<PaintingEditor> {
               _buildPainter(),
               if (widget.configs.paintEditorConfigs.showColorPicker)
                 _buildColorPicker(),
-              if (widget.configs.imageEditorTheme.editorMode ==
-                  ThemeEditorMode.whatsapp) ...[
-                WhatsAppPaintBottomBar(
-                  configs: widget.configs,
-                  strokeWidth: _imageKey.currentState?.strokeWidth ?? 0.0,
-                  onSetLineWidth: (val) {
-                    setState(() {
-                      _imageKey.currentState!.setStrokeWidth(val);
-                    });
-                  },
-                ),
-                WhatsAppPaintAppBar(
-                  configs: widget.configs,
-                  canUndo: canUndo,
-                  onDone: done,
-                  onTapUndo: undoAction,
-                  onClose: close,
-                  activeColor: activeColor,
-                ),
-              ]
             ],
           ),
         ),

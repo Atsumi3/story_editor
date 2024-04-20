@@ -6,7 +6,6 @@ import 'package:colorfilter_generator/presets.dart';
 import 'package:flutter/material.dart';
 import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 import 'package:story_editor/models/filter_state_history.dart';
-import 'package:story_editor/models/theme/theme.dart';
 import 'package:story_editor/widgets/story_editor_desktop_mode.dart';
 
 import '../../../models/blur_state_history.dart';
@@ -91,9 +90,6 @@ class _FilterEditorItemListState extends State<FilterEditorItemList> {
     super.dispose();
   }
 
-  bool get _isWhatsAppDesign =>
-      widget.configs.imageEditorTheme.editorMode == ThemeEditorMode.whatsapp;
-
   @override
   Widget build(BuildContext context) {
     return _buildFilterList();
@@ -115,12 +111,11 @@ class _FilterEditorItemListState extends State<FilterEditorItemList> {
             constraints:
                 BoxConstraints(minWidth: MediaQuery.of(context).size.width),
             child: Padding(
-              padding:
-                  EdgeInsets.fromLTRB(8, _isWhatsAppDesign ? 15 : 8, 8, 10),
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
               child: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.end,
                 alignment: WrapAlignment.spaceAround,
-                spacing: _isWhatsAppDesign ? 7 : 15,
+                spacing: 15,
                 children: <Widget>[
                   for (int i = 0; i < _filters.length; i++)
                     filterPreviewButton(
@@ -145,14 +140,6 @@ class _FilterEditorItemListState extends State<FilterEditorItemList> {
     required int index,
     List<FilterStateHistory>? activeFilters,
   }) {
-    if (_isWhatsAppDesign) {
-      return _buildWhatsAppFilterButton(
-        filter: filter,
-        name: name,
-        index: index,
-        activeFilters: activeFilters,
-      );
-    }
     var size = const Size(64, 64);
     return GestureDetector(
       key: ValueKey('Filter-$name-$index'),
@@ -199,111 +186,6 @@ class _FilterEditorItemListState extends State<FilterEditorItemList> {
             ),
           ),
         ]),
-      ),
-    );
-  }
-
-  Widget _buildWhatsAppFilterButton({
-    required ColorFilterGenerator filter,
-    required String name,
-    required int index,
-    List<FilterStateHistory>? activeFilters,
-  }) {
-    bool isSelected = widget.selectedFilter.hashCode == filter.hashCode ||
-        (widget.selectedFilter.filters.isEmpty && filter.filters.isEmpty);
-    var size = const Size(58, 88);
-
-    return Transform.scale(
-      scale: widget.itemScaleFactor,
-      child: GestureDetector(
-        key: ValueKey('Filter-$name-$index'),
-        onTap: () {
-          widget.onSelectFilter(filter);
-        },
-        child: AnimatedScale(
-          scale: isSelected ? 1.05 : 1,
-          alignment: Alignment.bottomCenter,
-          duration: const Duration(milliseconds: 200),
-          child: SizedBox(
-            height: size.height,
-            width: size.width,
-            child: Center(
-              child: Stack(
-                clipBehavior: Clip.hardEdge,
-                children: [
-                  ImageWithFilter(
-                    image: EditorImage(
-                      file: widget.file,
-                      byteArray: widget.byteArray,
-                      networkUrl: widget.networkUrl,
-                      assetPath: widget.assetPath,
-                    ),
-                    activeFilters: widget.activeFilters,
-                    size: size,
-                    designMode: widget.configs.designMode,
-                    filter: filter,
-                    blur: widget.blur,
-                    fit: BoxFit.cover,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Container(
-                      color: Colors.black54,
-                      width: double.infinity,
-                      padding: const EdgeInsets.fromLTRB(2, 3, 2, 3),
-                      child: Text(
-                        widget.configs.i18n.filterEditor.filters
-                            .getFilterI18n(name),
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: widget.configs.imageEditorTheme.filterEditor
-                              .previewTextColor,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 200),
-                      transitionBuilder: (child, animation) => FadeTransition(
-                        opacity: animation,
-                        child: ScaleTransition(
-                          scale: animation,
-                          child: child,
-                        ),
-                      ),
-                      child: isSelected
-                          ? Container(
-                              margin: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 2.5,
-                                ),
-                                borderRadius: BorderRadius.circular(100),
-                                color: const Color(0xFF13A589),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: Icon(
-                                  Icons.check,
-                                  size: 18,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

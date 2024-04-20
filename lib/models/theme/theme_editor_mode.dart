@@ -4,7 +4,4 @@
 enum ThemeEditorMode {
   /// Represents a simple mode for the theme editor.
   simple,
-
-  /// Represents a WhatsApp-themed mode for the theme editor.
-  whatsapp,
 }

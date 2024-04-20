@@ -2,12 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:rounded_background_text/rounded_background_text.dart';
-import 'package:story_editor/designs/whatsapp/whatsapp_text_appbar.dart';
 import 'package:story_editor/models/editor_configs/story_editor_configs.dart';
 import 'package:story_editor/models/theme/theme.dart';
 import 'package:story_editor/utils/design_mode.dart';
 
-import '../designs/whatsapp/whatsapp_text_bottombar.dart';
 import '../models/layer.dart';
 import '../utils/theme_functions.dart';
 import '../widgets/bottom_sheets_header_row.dart';
@@ -468,25 +466,6 @@ class TextEditorState extends State<TextEditor> {
               ),
             ),
           ),
-          if (widget.configs.imageEditorTheme.editorMode ==
-              ThemeEditorMode.whatsapp) ...[
-            WhatsAppTextAppBar(
-              configs: widget.configs,
-              align: align,
-              onDone: done,
-              onAlignChange: toggleTextAlign,
-              onBackgroundModeChange: toggleBackgroundMode,
-            ),
-            WhatsAppTextBottomBar(
-              configs: widget.configs,
-              selectedStyle: _customTextStyle,
-              onFontChange: (style) {
-                setState(() {
-                  _customTextStyle = style;
-                });
-              },
-            ),
-          ]
         ],
       ),
     );

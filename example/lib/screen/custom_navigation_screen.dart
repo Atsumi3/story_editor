@@ -43,6 +43,21 @@ class CustomNavigationScreen extends HookWidget {
             .toMap();
         debugPrint(history.toString());
       },
+      configs: StoryEditorConfigs(
+        customWidgets: ImageEditorCustomWidgets(
+          // Custom widgets for the editor
+          // You can customize the editor with your own widgets
+          // For example, you can add a custom button to the bottom navigation bar
+          bottomNavigationBar: IconButton(
+            icon: const Icon(Icons.layers_outlined),
+            onPressed: () {
+              debugPrint('object');
+              // storyEditor.openStickerEditor()
+              // storyEditor.openStickerEditor()
+            },
+          ),
+        ),
+      ),
     );
 
     return Scaffold(
@@ -61,7 +76,7 @@ class CustomNavigationScreen extends HookWidget {
             IconButton(
               icon: const Icon(Icons.emoji_emotions),
               onPressed: () {
-                storyEditor.
+                // storyEditor.openFilterEditor()
               },
             ),
           ],
