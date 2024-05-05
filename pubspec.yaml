@@ -37,7 +37,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  image_editor: ^1.4.0
+  image_editor:
+    git:
+      url: https://github.com/Atsumi3/flutter_image_editor.git
+      ref: patch/support-gradle-8
+      path: image_editor
   extended_image: ^8.2.0
   rounded_background_text: ^0.5.0
   colorfilter_generator: ^0.0.8
